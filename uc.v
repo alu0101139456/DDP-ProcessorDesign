@@ -4,12 +4,8 @@ parameter ARITH   = 4'b1011;
 parameter LOADINM = 4'b1110; 
 parameter JUMP    = 4'b0000; 
 parameter NOJUMP  = 4'b1000; 
-// parameter BNZ     = 4'b0100; 
-// parameter LIN     = 4'b0101; 
-// parameter STI     = 4'b0110; 
-// parameter STR     = 4'b0111; 
-// parameter JAL     = 4'b1001;  //TEMPORAL
-// parameter RET     = 4'b1010;  //TEMPORAL
+
+
 parameter NOP     = 4'b0000;
 reg [3:0] operation;
 

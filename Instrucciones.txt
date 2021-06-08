@@ -1,14 +1,14 @@
 
-MOV   NS  3   0000               REG    REG   REG
-NOT   NS  3   0001               REG    REG   REG
-ADD   NS  3   0010               REG    REG   REG
-SUB   NS  3   0011               REG    REG   REG
-AND   NS  3   0100               REG    REG   REG
-OR    NS  3   0101               REG    REG   REG
-NEG1  NS  3   0110               REG    REG   REG
-NEG2  NS  3   0111               REG    REG   REG
-LI    NS  2   1000               INM    REG
-BEZ   S   1   100100             DIR
-BNZ   S   1   100101             DIR
-JUMP  S   1   100110             DIR
+MOV     0000         REG    REG   REG
+NOT     0001         REG    REG   REG
+ADD     0010         REG    REG   REG
+SUB     0011         REG    REG   REG
+AND     0100         REG    REG   REG
+OR      0101         REG    REG   REG
+NEG1    0110         REG    REG   REG
+NEG2    0111         REG    REG   REG
+LI      1000         INM    REG
+BEZ     100100       DIR
+BNZ     100101       DIR
+JUMP    100110       DIR
 
