@@ -11,4 +11,5 @@ LI      1000         INM    REG
 BEZ     100100       DIR
 BNZ     100101       DIR
 JUMP    100110       DIR
-
+INPUT   100111       -*      --    WA3    -> * SELECCIONA PUERTO
+OUTPUT  101000       -*      RA2          -> * SELECCIONA PUERTO

@@ -1,17 +1,17 @@
 module uc(input wire [5:0] opcode, input wire z, output reg s_inc,
  s_inm, we3, wez, output reg [2:0] op_alu);
-parameter ARITH   = 4'b1011; 
-parameter LOADINM = 4'b1110; 
-parameter JUMP    = 4'b0000; 
-parameter NOJUMP  = 4'b1000; 
-
-
-parameter NOP     = 4'b0000;
+parameter ARITH   = 5'b10110; 
+parameter LOADINM = 5'b11100; 
+parameter JUMP    = 5'b00000; 
+parameter NOJUMP  = 5'b10000; 
+parameter IN      = 5'b10100;
+parameter OUT     = 5'b10001:
+parameter NOP     = 5'b00000;
 reg [3:0] operation;
 
-reg [3:0] signals; // ver si hace falta inicializarlo
+reg [4:0] signals; // ver si hace falta inicializarlo
 
-assign {s_inc, s_inm, we3, wez} = signals;
+assign {s_inc, s_inm, we3, wez, we_port} = signals;
 
 always @(opcode) begin
     op_alu = opcode[4:2];
