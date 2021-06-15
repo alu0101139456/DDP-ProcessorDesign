@@ -1,17 +1,19 @@
-module uc(input wire [5:0] opcode, input wire z, output reg s_inc,
- s_inm, we3, wez, output reg [2:0] op_alu);
-parameter ARITH   = 5'b10110; 
-parameter LOADINM = 5'b11100; 
-parameter JUMP    = 5'b00000; 
-parameter NOJUMP  = 5'b10000; 
-parameter IN      = 5'b10100;
-parameter OUT     = 5'b10001:
-parameter NOP     = 5'b00000;
+module uc(input wire [5:0] opcode, input wire z, output wire s_inc, we3, wez, 
+    output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port);
+
+parameter ARITH   = 6'b100110; 
+parameter LOADINM = 6'b111100; 
+parameter JUMP    = 6'b000000; 
+parameter NOJUMP  = 6'b100000; 
+parameter IN      = 6'b101100;
+parameter OUT     = 6'b100001;
+parameter NOP     = 6'b000000;
+
 reg [3:0] operation;
 
-reg [4:0] signals; // ver si hace falta inicializarlo
+reg [5:0] signals; // ver si hace falta inicializarlo
 
-assign {s_inc, s_inm, we3, wez, we_port} = signals;
+assign {s_inc, sel_inputs[1], sel_inputs[0], we3, wez, we_port} = signals;
 
 always @(opcode) begin
     op_alu = opcode[4:2];
@@ -39,8 +41,11 @@ always @(opcode) begin
 
         6'b100110: // salto incondicional
             signals = JUMP;
-        
-        
+
+        6'b100111:
+            signals = IN;
+        6'b101000:
+            signals = OUT;
         default: 
             signals = NOP; 
     endcase

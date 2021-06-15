@@ -56,6 +56,19 @@ module mux2 #(parameter WIDTH = 8)
 
 endmodule
 
+module mux4 #(parameter WIDTH = 8)
+             (input wire [WIDTH-1:0] d0, d1, d2, d3,
+             input wire [1:0] s, 
+             output wire [WIDTH-1:0] y);
+
+  wire [WIDTH-1:0] outM1, outM2;
+
+  mux2 #(WIDTH)m1 (d0, d1, s[0], outM1);
+  mux2 #(WIDTH)m2 (d2, d3, s[0], outM2);
+  mux2 #(WIDTH)m3 (outM1, outM2, s[1], y); 
+  
+endmodule
+
 //Biestable para el flag de cero
 //Biestable tipo D s�ncrono con reset as�ncrono por flanco y entrada de habilitaci�n de carga
 module ffd(input wire clk, reset, d, carga, output reg q);
