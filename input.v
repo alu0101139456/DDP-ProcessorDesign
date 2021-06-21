@@ -6,7 +6,7 @@ module input_module ( input wire clk, reset, sel_port, input wire [7:0] in_p0, i
 
     registro P1(clk, reset, in_p1, p1_2Mux);
 
-    mux2 mux_port(p0_2Mux, p1_2Mux, sel_port, out);
+    mux2 MUX_PORT(p0_2Mux, p1_2Mux, sel_port, out);
     
 
 endmodule
