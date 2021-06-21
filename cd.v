@@ -21,7 +21,7 @@ module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, input wire [2:0] op
     mux2 #(10) MUX_PC(DIR_SALTO[9:0], sum2mux, s_inc, mux1_to_pc);
     sum SUMADOR(10'b1, DIR, sum2mux);
 
-    memprog MEMPROG(clk, DIR, DIR_SALTO);
+    memprog #(16,1024) MEMPROG(clk, DIR, DIR_SALTO);
     regfile REGFILE(clk, we3, RA1, RA2, WA3, WD3, RD1, RD2);
 
     ffd FFD(clk, reset, ZALU, wez, z);
