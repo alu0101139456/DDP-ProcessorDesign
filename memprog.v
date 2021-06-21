@@ -1,10 +1,10 @@
 //Memoria de programa, se inicializa y no se modifica
 
-module memprog(input  wire        clk,
-               input  wire [9:0]  a,
-               output wire [15:0] rd);
+module memprog #(parameter WIDTH = 16, parameter ELEMENTOS = 1024)(input  wire        clk,
+               input  wire [$clog2(ELEMENTOS)-1:0]  a,
+               output wire [WIDTH - 1:0] rd);
 
-  reg [15:0] mem[0:1023]; //memoria de 1024 palabras de 16 bits de ancho
+  reg [WIDTH - 1:0] mem[0:ELEMENTOS-1]; //memoria de 1024 palabras de 16 bits de ancho
 
   initial
   begin
