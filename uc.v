@@ -9,9 +9,7 @@ parameter IN      = 8'b10110000;
 parameter OUT     = 8'b10000100;
 parameter NOP     = 8'b00000000;
 parameter JAL     = 8'b00000010;
-parameter RET     = 8'b00000001;
-
-
+parameter RET     = 8'b00000011;
 
 reg [3:0] operation;
 

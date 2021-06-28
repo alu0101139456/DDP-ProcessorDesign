@@ -31,7 +31,7 @@ module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, s_we_stack, s_jalre
     io_module PORTS_MODULE(clk, reset, io_port, s_we_port, in_p0, in_p1, RD2, out_p0, out_p1, ports_to_mux4);
     mux4 MUX_OF_INPUTS(alu_to_mux4, ports_to_mux4, stack_to_mux4, inm_to_mux4, sel_inputs, WD3);
 
-    mux2 #(10) MUX_JUMPS(dir_salto, dir_out, s_if_return, jump_address );
+    mux2 #(10) MUX_JUMPS(dir_salto, dir_out, s_jalret, jump_address );
     
     stack_module STACK_M(clk, reset, s_we_stack, s_jalret, dir_in, dir_out);
 
