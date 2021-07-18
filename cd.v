@@ -1,4 +1,4 @@
-module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, s_we_stack, s_jalret, input wire [2:0] op_alu, input wire [1:0] sel_inputs, 
+module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, s_we_stack, s_jalret, s_we_stack_data,  s_pushpop, input wire [2:0] op_alu, input wire [1:0] sel_inputs, 
     input wire [7:0] in_p0, in_p1, output wire z, output wire [5:0] opcode, output wire [7:0] out_p0, out_p1);
 //Camino de datos de instrucciones de un solo ciclo
 //Nomenclatura 
@@ -33,6 +33,10 @@ module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, s_we_stack, s_jalre
 
     mux2 #(10) MUX_JUMPS(dir_salto, dir_out, s_jalret, jump_address );
     
-    stack_module STACK_M(clk, reset, s_we_stack, s_jalret, dir_in, dir_out);
+    // stack_module STACK_INST(clk, reset, s_we_stack, s_jalret, dir_in, dir_out);
+    
+    stack_module #(8,64) STACK_DATA(clk, reset, s_we_stack_data, s_pushpop, RD2, stack_to_mux4);
+
+
 
 endmodule

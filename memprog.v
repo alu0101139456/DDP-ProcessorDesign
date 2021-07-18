@@ -24,8 +24,16 @@ module memstack #(parameter WIDTH = 16, parameter NWORDS = 1024)(input  wire clk
 
   reg [WIDTH - 1:0] mem[0:NWORDS-1]; //memoria de 1024 palabras de 16 bits de ancho
 
- always @(posedge clk)
-    if (we) mem[a] <= data_in;	
+ always @(posedge clk) begin
+    // $display("A is: %d", a);
+    #1;
+    if (we) begin
+      // $display("Writing %d", data_in);
+      // $display("sp: %d", a);
+      mem[a] <= data_in;
+      
+    end	
+ end
   
   assign data_out = mem[a];
 
