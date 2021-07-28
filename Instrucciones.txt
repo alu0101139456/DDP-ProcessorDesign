@@ -11,9 +11,11 @@ LI      1000         INM    REG
 BEZ     100100       DIR
 BNZ     100101       DIR
 JUMP    100110       DIR
-INPUT   100111       -*      --    WA3    -> * SELECCIONA PUERTO
-OUTPUT  101000       -*      RA2          -> * SELECCIONA PUERTO
+INPUT   100111       **      --    WA3    -> * SELECCIONA PUERTO
+OUTPUT  101000       **      RA2          -> * SELECCIONA PUERTO
 JAL     101001       DIR
 RET     101010          
 PUSH    101011       --      RA2        
 POP     101100       --      ----  WA3    
+READ    1110         
+WRITE   1111        

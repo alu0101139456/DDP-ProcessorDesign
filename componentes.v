@@ -82,9 +82,9 @@ module ffd(input wire clk, reset, d, carga, output reg q);
 
 endmodule 
 
-module deco #(parameter NBITS = 8) (input wire [$clog2(NBITS)-1:0] selector, reg [$clog2(NBITS)-1:0] out);
+module deco #(parameter NBITS = 8) (input wire [$clog2(NBITS)-1:0] selector, output reg [NBITS-1:0] out);
   
-  reg [$clog2(NBITS)-1:0] one = 1;
+  reg [NBITS-1:0] one = 1;
   
   always @(selector) begin
     out = one << selector;    
