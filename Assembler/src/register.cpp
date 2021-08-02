@@ -13,3 +13,9 @@ int Register::GetData(void) {
 int Register::GetSize(void) {
   return sz_;
 }
+
+Register& Register::operator=(const Register& rhs) {
+  data_ = rhs.data_;
+  sz_ = rhs.sz_;
+  return *this;
+}

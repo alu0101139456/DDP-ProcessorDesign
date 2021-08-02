@@ -20,9 +20,18 @@ Instruction::Instruction(std::string name,std::vector<int> regs, int opcode) {
 
   }
   inst_[0].SetData(opcode);
-    
+
 }
 
+Instruction::Instruction(std::string name,std::vector<Register> regs, int opcode) {
+  name_ = name;
+  for (size_t i = 0; i < regs.size(); i++) {
+    inst_[i] = regs[i];
+
+  }
+  inst_[0].SetData(opcode);
+    
+}
 Instruction::~Instruction()
 {
 }

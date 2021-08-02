@@ -17,6 +17,8 @@ public:
   int GetSize(void);
 
   int GetData(void);
+
+  Register& operator=(const Register& rhs);
 };
 
 
