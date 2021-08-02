@@ -1,0 +1,23 @@
+#
+
+
+4 4 4 4 MOV     0000         REG    REG   REG
+4 4 4 4 NOT     0001         REG    REG   REG
+4 4 4 4 ADD     0010         REG    REG   REG
+4 4 4 4 SUB     0011         REG    REG   REG
+4 4 4 4 AND     0100         REG    REG   REG
+4 4 4 4 OR      0101         REG    REG   REG
+4 4 4 4 NEG1    0110         REG    REG   REG
+4 4 4 4 NEG2    0111         REG    REG   REG
+4 8   4 LI      1000         INM          REG
+6 10    BEZ     100100       DIR
+6 10    BNZ     100101       DIR
+6 10    JUMP    100110       DIR
+6 2 4 4 INPUT   100111       PORT   ---   WA3    #-> * SELECCIONA PUERTO
+6 2 4 4 OUTPUT  101000       PORT   RA2   ---    #-> * SELECCIONA PUERTO
+6 10    JAL     101001       DIR
+6 10    RET     101010       ---   
+6 2 4 4 PUSH    101011       ---    RA2   ---       
+6 2 4 4 POP     101100       ---    ---   WA3    
+#READ    1110         
+#WRITE   1111        
