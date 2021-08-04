@@ -4,11 +4,11 @@
 class Register
 {
  private:
-  int data_;
+  int data_=0;
   int sz_;
 
 public:
-  Register(int sz):sz_(sz) {}
+  Register(int sz);
   
   ~Register(){}
 

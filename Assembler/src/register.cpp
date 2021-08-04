@@ -1,6 +1,6 @@
 #include "register.hpp"
 
-
+Register::Register(int sz):sz_(sz) {}
 
 void Register::SetData(int data) {
   data_ = data;

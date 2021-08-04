@@ -26,21 +26,17 @@ bool Parser::LoadInstructionsFromFile(std::string fileInstructions) {
     std::cerr << "No se pudo abrir el fichero \"" << fileInstructions << "\"" << std::endl;
     return false;
   }
-  int aux;
+  int sz=0;
   // std::vector<int> regInt;
   std::vector<Register> regInt;
-  std::vector<std::string> regs(4);
+  std::vector<std::string> regs(4);  
   std::string temp;
-  while (!file.eof()) { 
-    
+  while (!file.eof()) {
     file >> regs[0] >> regs[1] >> regs[2] >> regs[3];
-    
     for (size_t i = 0; i < regs.size(); i++) {
-      
       std::stringstream inVal(regs[i]);
-      inVal >> aux;
-      regInt.push_back(Register(aux));
-      // std::cout << regInt[i] << std::endl;
+      inVal >> sz;
+      regInt.push_back(Register(sz));
     }
     std::string nameInstruction;
     std::string opcode;
@@ -48,14 +44,8 @@ bool Parser::LoadInstructionsFromFile(std::string fileInstructions) {
     file >> nameInstruction >> opcode;
     std::stringstream op(opcode);
     op >> opcodeInt;    
-    std::cout << "Nombre: " << nameInstruction;
-    std::cout << " Opcode: " << std::setfill('0') << std::setw(4) << opcodeInt << std::endl;
-
     instructions_.push_back(Instruction(nameInstruction, regInt, opcodeInt));
-
-
-    // }
-
+    regInt.clear();
   }
 
     
@@ -65,10 +55,13 @@ bool Parser::LoadInstructionsFromFile(std::string fileInstructions) {
 }
 
 void Parser::ShowInstructionsLoad(void) {
+  std::cout << "hay " << instructions_.size() << " instrucciones cargadas" << std::endl;
+
   for (size_t i = 0; i < instructions_.size(); i++) {
     std::cout << instructions_[i].GetName();
-    for (size_t i = 0; i < instructions_[i].GetRegisters().size(); i++) {
-      std::cout << "R" << i << "= " << instructions_[i].GetRegisters().at(i).GetData() << " ";
+    for (size_t j = 0; j < instructions_[i].GetRegisters().size(); j++) {
+      std::cout << " R" << j << "= " << instructions_[i].GetRegisters().at(j).GetSize() << " ";
+      std::cout << " D[" << std::setfill('0') << std::setw(4) << instructions_[i].GetRegisters()[j].GetData() << "] ";
     }
     std::cout << '\n';
      
