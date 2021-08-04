@@ -10,6 +10,7 @@ class Register
 public:
   Register(int sz);
   
+  
   ~Register(){}
 
   void SetData(int data);
