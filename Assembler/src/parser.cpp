@@ -3,9 +3,9 @@
 
 
 
-Parser::Parser(std::string fileInstructions) {
+Parser::Parser(std::string fileInstructions, std::string fileAssambler) {
   
-  if(LoadInstructionsFromFile(fileInstructions)){
+  if(LoadInstructionsFromFile(fileInstructions)&&LoadAssamblerFromFile(fileAssambler)){
     std::cout << "Instrucciones leidas correctamente" << std::endl;
   }else {
     std::cout << "Fallo al cargar instrucciones" << std::endl;
@@ -67,4 +67,31 @@ void Parser::ShowInstructionsLoad(void) {
      
   }
   
+}
+
+
+bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
+
+  
+  std::ifstream file(fileAssambler);
+  if(!file.is_open()) {
+    std::cerr << "No se pudo abrir el fichero \"" << fileAssambler << "\"" << std::endl;
+    return false;
+  }
+  std::string aux;
+  while (!file.eof()) {
+    file >> aux;
+    if (aux[0] == '\n')
+    std::cout << "pilot";
+    std::cout << "*" << aux;
+    
+
+  }
+
+    
+  file.close();
+  return true;
+
+
+
 }
