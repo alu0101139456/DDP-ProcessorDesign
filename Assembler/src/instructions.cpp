@@ -42,3 +42,20 @@ std::string Instruction::GetName() {
 std::vector<Register> Instruction::GetRegisters() {
   return inst_;
 }
+
+void Instruction::DelInst() {
+  inst_.clear();
+  name_.clear();
+}
+
+std::vector<Register>& Instruction::SetRegister() {
+  return inst_;
+}
+
+void Instruction::SetName(std::string rhs) {
+ name_ = rhs; 
+}
+
+int Instruction::GetOpcode() {
+  return inst_[0].GetData();
+}

@@ -17,9 +17,11 @@ class Instruction
   ~Instruction();
 
   std::string GetName();
+  void SetName(std::string);
   std::vector<Register> GetRegisters();
-
-  
+  void DelInst();
+  std::vector<Register>& SetRegister();
+  int GetOpcode();
   
 };
 

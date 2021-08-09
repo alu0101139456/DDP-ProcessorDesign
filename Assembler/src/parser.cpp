@@ -11,7 +11,8 @@ Parser::Parser(std::string fileInstructions, std::string fileAssambler) {
     std::cout << "Fallo al cargar instrucciones" << std::endl;
   }
 
-  ShowInstructionsLoad();
+  // ShowInstructionsLoad();
+  ShowCreateInstructions();
 
 }
 
@@ -60,8 +61,28 @@ void Parser::ShowInstructionsLoad(void) {
   for (size_t i = 0; i < instructions_.size(); i++) {
     std::cout << instructions_[i].GetName();
     for (size_t j = 0; j < instructions_[i].GetRegisters().size(); j++) {
+      if(instructions_[i].GetRegisters().at(j).GetSize() > 0) {
       std::cout << " R" << j << "= " << instructions_[i].GetRegisters().at(j).GetSize() << " ";
-      std::cout << " D[" << std::setfill('0') << std::setw(4) << instructions_[i].GetRegisters()[j].GetData() << "] ";
+      
+      std::cout << " D[" << std::setfill('0') << std::setw(instructions_[i].GetRegisters().at(j).GetSize()) << instructions_[i].GetRegisters()[j].GetData() << "] ";
+      }
+    }
+    std::cout << '\n';
+     
+  }
+  
+}
+
+void Parser::ShowCreateInstructions(void) {
+  
+  for (size_t i = 0; i < makeInst_.size(); i++) {
+    std::cout << makeInst_[i].GetName();
+    for (size_t j = 0; j < makeInst_[i].GetRegisters().size(); j++) {
+      if(makeInst_[i].GetRegisters().at(j).GetSize() > 0) {
+      std::cout << " R" << j << "= " << makeInst_[i].GetRegisters().at(j).GetSize() << " ";
+      
+      std::cout << " D[" << std::setfill('0') << std::setw(makeInst_[i].GetRegisters().at(j).GetSize()) << makeInst_[i].GetRegisters()[j].GetData() << "] ";
+      }
     }
     std::cout << '\n';
      
@@ -70,21 +91,59 @@ void Parser::ShowInstructionsLoad(void) {
 }
 
 
-bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
 
-  
+bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
+  int line=0;
+  bool isSame=false;
+  Instruction temp;
   std::ifstream file(fileAssambler);
   if(!file.is_open()) {
     std::cerr << "No se pudo abrir el fichero \"" << fileAssambler << "\"" << std::endl;
     return false;
   }
+  int i=1;
   std::string aux;
-  while (!file.eof()) {
-    file >> aux;
-    if (aux[0] == '\n')
-    std::cout << "pilot";
-    std::cout << "*" << aux;
-    
+  while (std::getline(file, aux)) {
+    std::cout << "linea = " << line << "\n";
+    line++;
+    std::stringstream ss(aux);
+    isSame = false;
+    while (std::getline(ss, aux, ' ')) {
+      aux.erase(remove(aux.begin(), aux.end(), ','), aux.end());
+      temp = IsInstruction(aux);
+      std::cout << "Encontrado " << temp.GetName() << " con opcode: " << temp.GetOpcode() << std::endl;
+      std::cout << "Registros con valores: " << std::endl;
+      for (size_t i = 0; i < temp.GetRegisters().size(); i++ ){
+        std::cout << temp.GetRegisters().at(i).GetSize();
+      }
+      
+      if( temp.GetName() == aux )  {
+        isSame = true;
+        temp.SetName(aux);
+        std::cout << "Instruction: " ;
+      }
+      else if( aux.find('R') != std::string::npos && isSame) {
+        std::cout << "Register " ;
+        aux.erase(remove(aux.begin(), aux.end(), 'R'), aux.end());
+        std::cout << ConvertToBinary(aux) << " ->";
+        std::cout << "Metiendo en" << temp.GetName() << " vector provisional\n";
+        Register regTemp(temp.GetRegisters().at(i).GetSize());
+        regTemp.SetData(ConvertToBinary(aux));
+        temp.SetRegister().push_back(ConvertToBinary(aux));
+        
+      } 
+      else if (aux.find(':') != std::string::npos) {
+        std::cout << "Jump ";
+      }
+      else {
+        std::cout << "Number: " ;
+        std::cout << ConvertToBinary(aux) << " ->";
+      }
+           
+      std::cout << aux << std::endl;
+    }
+    makeInst_.push_back(temp);
+    temp.DelInst();
 
   }
 
@@ -92,6 +151,42 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
   file.close();
   return true;
 
+
+
+}
+
+
+
+Instruction Parser::IsInstruction(std::string rhs) {
+  Instruction a;
+  for (size_t i = 0; i < instructions_.size(); i++) {
+    if(rhs == instructions_[i].GetName()){
+      return instructions_[i];
+    }
+  }
+  return a;
+  
+}
+
+
+
+int Parser::ConvertToBinary(std::string rsh ) {
+  int aux;
+  std::stringstream inVal(rsh);
+  inVal >> aux;
+
+  int binarynum = 0;
+	int mod, place = 1;
+ 
+	while (aux != 0){
+		mod = aux % 2;
+		aux = aux / 2;
+		binarynum = binarynum + (mod * place);
+		place = place * 10;
+	}
+	return binarynum;
+  
+   
 
 
 }
