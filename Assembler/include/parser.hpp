@@ -25,6 +25,7 @@ class Parser
   void ShowCreateInstructions();
 
   Instruction IsInstruction(std::string);
+  bool IsInst(std::string);
   
   int ConvertToBinary(std::string);
 

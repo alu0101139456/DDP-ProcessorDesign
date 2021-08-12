@@ -79,7 +79,7 @@ void Parser::ShowCreateInstructions(void) {
     std::cout << makeInst_[i].GetName();
     for (size_t j = 0; j < makeInst_[i].GetRegisters().size(); j++) {
       if(makeInst_[i].GetRegisters().at(j).GetSize() > 0) {
-      std::cout << " R" << j << "= " << makeInst_[i].GetRegisters().at(j).GetSize() << " ";
+      std::cout << " R" << j << " Sz=" << makeInst_[i].GetRegisters().at(j).GetSize() << " ";
       
       std::cout << " D[" << std::setfill('0') << std::setw(makeInst_[i].GetRegisters().at(j).GetSize()) << makeInst_[i].GetRegisters()[j].GetData() << "] ";
       }
@@ -101,35 +101,43 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
     std::cerr << "No se pudo abrir el fichero \"" << fileAssambler << "\"" << std::endl;
     return false;
   }
-  int i=1;
+  
   std::string aux;
   while (std::getline(file, aux)) {
     std::cout << "linea = " << line << "\n";
     line++;
+    int j=0;
     std::stringstream ss(aux);
     isSame = false;
     while (std::getline(ss, aux, ' ')) {
       aux.erase(remove(aux.begin(), aux.end(), ','), aux.end());
-      temp = IsInstruction(aux);
+      // temp = IsInstruction(aux);
+      // if(temp.GetName() != ""){
+        if(IsInst(aux)) {
+          temp = IsInstruction(aux);
       std::cout << "Encontrado " << temp.GetName() << " con opcode: " << temp.GetOpcode() << std::endl;
-      std::cout << "Registros con valores: " << std::endl;
+      std::cout << "Registros con valores: ";
       for (size_t i = 0; i < temp.GetRegisters().size(); i++ ){
         std::cout << temp.GetRegisters().at(i).GetSize();
       }
-      
+      std::cout << std::endl;
+      }
       if( temp.GetName() == aux )  {
         isSame = true;
         temp.SetName(aux);
-        std::cout << "Instruction: " ;
+        std::cout << "Instruction: " << temp.GetName();
       }
       else if( aux.find('R') != std::string::npos && isSame) {
         std::cout << "Register " ;
         aux.erase(remove(aux.begin(), aux.end(), 'R'), aux.end());
         std::cout << ConvertToBinary(aux) << " ->";
-        std::cout << "Metiendo en" << temp.GetName() << " vector provisional\n";
-        Register regTemp(temp.GetRegisters().at(i).GetSize());
+        std::cout << "Selecionado registro: " << j << std::endl;
+        
+        std::cout << "Tamaño del registro: " << temp.GetRegisters().at(j).GetSize() << std::endl;
+        Register regTemp(temp.GetRegisters().at(j).GetSize());
         regTemp.SetData(ConvertToBinary(aux));
-        temp.SetRegister().push_back(ConvertToBinary(aux));
+        temp.SetRegister().at(j) = regTemp;
+        // temp.SetRegister().push_back(ConvertToBinary(aux));
         
       } 
       else if (aux.find(':') != std::string::npos) {
@@ -137,13 +145,23 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
       }
       else {
         std::cout << "Number: " ;
-        std::cout << ConvertToBinary(aux) << " ->";
+        std::cout << ConvertToBinary(aux);
+        Register regTemp(temp.GetRegisters().at(j).GetSize());
+        regTemp.SetData(ConvertToBinary(aux));
+        temp.SetRegister().at(j) = regTemp;
       }
-           
-      std::cout << aux << std::endl;
+      j++;     
+      std::cout << std::endl;
     }
+    // std::cout << "Mostrando : " << std::endl;
+    // for (size_t i = 0; i < temp.GetRegisters().size(); i++)
+    // {
+    //   std::cout << temp.GetRegisters().at(i).GetData() << "/";
+    // }
+    
     makeInst_.push_back(temp);
-    temp.DelInst();
+    // temp.DelInst();
+    // i=1;
 
   }
 
@@ -165,6 +183,18 @@ Instruction Parser::IsInstruction(std::string rhs) {
     }
   }
   return a;
+  
+}
+
+
+bool Parser::IsInst(std::string rhs) {
+
+  for (size_t i = 0; i < instructions_.size(); i++) {
+    if(rhs == instructions_[i].GetName()){
+      return true;
+    }
+  }
+  return false;
   
 }
 
