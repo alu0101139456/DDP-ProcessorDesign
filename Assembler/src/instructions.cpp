@@ -59,3 +59,11 @@ void Instruction::SetName(std::string rhs) {
 int Instruction::GetOpcode() {
   return inst_[0].GetData();
 }
+
+void Instruction::SetNameJump(std::string rhs) {
+  nameJump_ = rhs;
+}
+
+std::string Instruction::GetNameJump() {
+  return nameJump_;
+}

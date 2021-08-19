@@ -1,7 +1,12 @@
+:inicio
 ADD R1, R2, R3
+JUMP :test
 SUB R1, R2, R3
-LI R1, 128
+LI 128, R1
 JUMP :salto
 ADD R8, R9, R10
 :salto
-LI R1, 255
+LI 255, R1
+:test
+ADD R1, R3, R9 
+JUMP :inicio

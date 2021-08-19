@@ -8,6 +8,7 @@ class Instruction
  private:
   std::vector<Register> inst_;
   std::string name_;
+  std::string nameJump_;
 
  public:
   Instruction(/* args */);
@@ -22,6 +23,9 @@ class Instruction
   void DelInst();
   std::vector<Register>& SetRegister();
   int GetOpcode();
+
+  void SetNameJump(std::string);
+  std::string GetNameJump();
   
 };
 

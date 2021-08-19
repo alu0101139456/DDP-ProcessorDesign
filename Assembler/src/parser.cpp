@@ -14,6 +14,8 @@ Parser::Parser(std::string fileInstructions, std::string fileAssambler) {
   // ShowInstructionsLoad();
   ShowCreateInstructions();
 
+  // ShowJumpsTable();
+
 }
 
 Parser::~Parser()
@@ -105,22 +107,20 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
   std::string aux;
   while (std::getline(file, aux)) {
     std::cout << "linea = " << line << "\n";
-    line++;
+    
     int j=0;
     std::stringstream ss(aux);
     isSame = false;
     while (std::getline(ss, aux, ' ')) {
       aux.erase(remove(aux.begin(), aux.end(), ','), aux.end());
-      // temp = IsInstruction(aux);
-      // if(temp.GetName() != ""){
-        if(IsInst(aux)) {
-          temp = IsInstruction(aux);
-      std::cout << "Encontrado " << temp.GetName() << " con opcode: " << temp.GetOpcode() << std::endl;
-      std::cout << "Registros con valores: ";
-      for (size_t i = 0; i < temp.GetRegisters().size(); i++ ){
-        std::cout << temp.GetRegisters().at(i).GetSize();
-      }
-      std::cout << std::endl;
+      if(IsInst(aux)) {
+        temp = IsInstruction(aux);
+        std::cout << "Encontrado " << temp.GetName() << " con opcode: " << temp.GetOpcode() << std::endl;
+        std::cout << "Registros con valores: ";
+        for (size_t i = 0; i < temp.GetRegisters().size(); i++ ){
+          std::cout << temp.GetRegisters().at(i).GetSize();
+        }
+        std::cout << std::endl;
       }
       if( temp.GetName() == aux )  {
         isSame = true;
@@ -134,6 +134,10 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
         std::cout << "Selecionado registro: " << j << std::endl;
         
         std::cout << "Tamaño del registro: " << temp.GetRegisters().at(j).GetSize() << std::endl;
+        if(temp.GetRegisters().at(j).GetSize() == 0) { 
+          j++;
+          std::cout << "Tamaño del registro: " << temp.GetRegisters().at(j).GetSize() << std::endl;
+        }
         Register regTemp(temp.GetRegisters().at(j).GetSize());
         regTemp.SetData(ConvertToBinary(aux));
         temp.SetRegister().at(j) = regTemp;
@@ -141,11 +145,36 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
         
       } 
       else if (aux.find(':') != std::string::npos) {
-        std::cout << "Jump ";
+        aux.erase(remove(aux.begin(), aux.end(), ':'), aux.end());
+        if(isSame) {
+          temp.SetNameJump(aux);
+          std::cout << "Etiqueta \"" << aux << "\" con instrucción sin direccion"  << std::endl;
+          
+        }else {
+          if(FindJump(aux)) {
+            for (size_t i = 0; i < makeInst_.size(); i++) {
+              if( makeInst_[i].GetNameJump() == aux) {
+                makeInst_[i].SetRegister().at(j).SetData()
+              }
+            }
+            
+            temp.SetRegister().at(j).SetData()
+          }
+          else {
+            jumps_.push_back(std::pair<std::string, int>(aux, line));
+          }
+          
+          std::cout << "\""<< aux << "\" en línea : " << line << std::endl;
+          //  = std::pair<std::string,int>(aux, line);
+          
+        }
+
       }
       else {
         std::cout << "Number: " ;
-        std::cout << ConvertToBinary(aux);
+        // std::cout << ConvertToBinary(aux);
+        std::cout << ConvertToBinary(aux) << " ->";
+        std::cout << "Selecionado registro: " << j << std::endl;
         Register regTemp(temp.GetRegisters().at(j).GetSize());
         regTemp.SetData(ConvertToBinary(aux));
         temp.SetRegister().at(j) = regTemp;
@@ -153,16 +182,11 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
       j++;     
       std::cout << std::endl;
     }
-    // std::cout << "Mostrando : " << std::endl;
-    // for (size_t i = 0; i < temp.GetRegisters().size(); i++)
-    // {
-    //   std::cout << temp.GetRegisters().at(i).GetData() << "/";
-    // }
     
     makeInst_.push_back(temp);
     // temp.DelInst();
     // i=1;
-
+    line++;
   }
 
     
@@ -217,6 +241,28 @@ int Parser::ConvertToBinary(std::string rsh ) {
 	return binarynum;
   
    
+}
 
+
+void Parser::ShowJumpsTable() {
+
+  for (size_t i = 0; i < jumps_.size(); i++) {
+    std::cout << "Etiqueta: " << jumps_[i].first << " linea: " << jumps_[i].second << std::endl;
+  }
+  
+
+}
+
+bool Parser::FindJump(std::string aux) {
+
+  for (size_t i = 0; i < jumps_.size(); i++) {
+    if( jumps_[i].first == aux) {
+      return true;
+    }
+  }
+  
+  return false;
+
+  
 
 }
