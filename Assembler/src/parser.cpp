@@ -14,7 +14,7 @@ Parser::Parser(std::string fileInstructions, std::string fileAssambler) {
   // ShowInstructionsLoad();
   ShowCreateInstructions();
 
-  // ShowJumpsTable();
+  ShowJumpsTable();
 
 }
 
@@ -152,13 +152,8 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
           
         }else {
           if(FindJump(aux)) {
-            for (size_t i = 0; i < makeInst_.size(); i++) {
-              if( makeInst_[i].GetNameJump() == aux) {
-                makeInst_[i].SetRegister().at(j).SetData()
-              }
-            }
-            
-            temp.SetRegister().at(j).SetData()
+                 
+            // temp.SetRegister().at(j).SetData()
           }
           else {
             jumps_.push_back(std::pair<std::string, int>(aux, line));
@@ -188,6 +183,11 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
     // i=1;
     line++;
   }
+
+  // for (size_t i = 0; i < makeInst_.size(); i++) {
+  //   if(makeInst_[i].GetName() ==)
+  // }
+  
 
     
   file.close();
@@ -260,9 +260,6 @@ bool Parser::FindJump(std::string aux) {
       return true;
     }
   }
-  
-  return false;
-
-  
+  return false;  
 
 }

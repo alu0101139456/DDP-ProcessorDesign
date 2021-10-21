@@ -9,6 +9,7 @@ class Instruction
   std::vector<Register> inst_;
   std::string name_;
   std::string nameJump_;
+  bool isJump_;
 
  public:
   Instruction(/* args */);
