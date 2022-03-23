@@ -33,7 +33,7 @@ module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, s_we_stack, s_jalre
 
     mux2 #(10) MUX_JUMPS(dir_salto, dir_out, s_jalret, jump_address );
     
-    // stack_module STACK_INST(clk, reset, s_we_stack, s_jalret, dir_in, dir_out);
+    stack_module STACK_INST(clk, reset, s_we_stack, s_jalret, dir_in, dir_out);
     
     stack_module #(8,64) STACK_DATA(clk, reset, s_we_stack_data, s_pushpop, RD2, stack_to_mux4);
 
