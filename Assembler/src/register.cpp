@@ -2,6 +2,9 @@
 
 Register::Register(int sz):sz_(sz) {}
 
+Register::Register(int sz, int jump):
+  sz_(sz), data_(jump) {}
+
 void Register::SetData(int data) {
   data_ = data;
 }
