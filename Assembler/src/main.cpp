@@ -5,7 +5,8 @@
 
 int main(int argc, char* argv[]) {
 
-  Parser conver(argv[1], argv[2]);
+  if (argc == 4)
+  Parser conver(argv[1], argv[2], argv[3]);
   
 
 }

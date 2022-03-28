@@ -3,7 +3,7 @@
 
 
 
-Parser::Parser(std::string fileInstructions, std::string fileAssambler) {
+Parser::Parser(std::string fileInstructions, std::string fileAssambler, std::string fileOutput) {
   
   if(LoadInstructionsFromFile(fileInstructions)&&LoadAssamblerFromFile(fileAssambler)){
     std::cout << "Instrucciones leidas correctamente" << std::endl;
@@ -17,7 +17,7 @@ Parser::Parser(std::string fileInstructions, std::string fileAssambler) {
   // ShowJumpsTable();
   
   ShowCreatedInstructions();
-  MakeBinaryFile("p");
+  MakeBinaryFile(fileOutput);
 }
 
 Parser::~Parser()
@@ -95,14 +95,16 @@ void Parser::ShowCreatedInstructions(void) {
   
 }
 
-void Parser::MakeBinaryFile(std::string outName) {
+void Parser::MakeBinaryFile(std::string outFile) {
+  std::ofstream out(outFile);
   for (size_t i = 0; i < makedInst_.size(); i++) {
     for (size_t j = 0; j < makedInst_[i].GetRegisters().size(); j++) {
       if(makedInst_[i].GetRegisters().at(j).GetSize() != 0)
-      std::cout << std::setfill('0') << std::setw(makedInst_[i].GetRegisters().at(j).GetSize()) << makedInst_[i].GetRegisters()[j].GetData();
+      out << std::setfill('0') << std::setw(makedInst_[i].GetRegisters().at(j).GetSize()) << makedInst_[i].GetRegisters()[j].GetData();
     }
-    std::cout << '\n';
+    out << '\n';
   }
+  out.close();
 }
 
 

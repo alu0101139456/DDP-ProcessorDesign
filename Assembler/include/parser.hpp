@@ -23,7 +23,7 @@ class Parser
 
 
  public:
-  Parser(std::string, std::string);
+  Parser(std::string, std::string, std::string);
   ~Parser();
   bool LoadInstructionsFromFile(std::string);
   bool LoadAssamblerFromFile(std::string);
