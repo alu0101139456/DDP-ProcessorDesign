@@ -9,11 +9,12 @@ class Instruction
   std::vector<Register> inst_;
   std::string name_;
   std::string nameJump_;
-  bool isJump_;
+  bool isJump_ = false;
+  bool isLabel_ = false;
 
  public:
   Instruction(/* args */);
-  // Instruction(std::string, int, int, int, int);
+  Instruction(int);
   Instruction(std::string name,std::vector<int> regs, int);
   Instruction(std::string name,std::vector<Register> regs, int);
   ~Instruction();
@@ -26,8 +27,11 @@ class Instruction
   int GetOpcode();
 
   void SetNameJump(std::string);
+  bool IsJump();
+  bool IsLabel();
   std::string GetNameJump();
+  int SetDirJump(int);
+  Instruction& operator=(const Instruction& rhs);
   
 };
-
 
