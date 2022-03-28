@@ -2,7 +2,7 @@ module input_module ( input wire clk, reset, input wire [1:0] sel_port, input wi
     
     wire [7:0] p0_2Mux, p1_2Mux, p2_2Mux,p3_2Mux;
 
-    assign interrupt = |(p0_2Mux); //Es mas estable que in_p0 
+    
 
     registro P0(clk, reset, in_p0, p0_2Mux); // Puerto dedicado para interrupciones
 
