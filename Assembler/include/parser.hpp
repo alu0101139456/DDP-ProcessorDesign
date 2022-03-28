@@ -17,7 +17,7 @@ class Parser
 {
  private:
    std::vector<Instruction> instructions_;
-   std::vector<Instruction> makeInst_;
+   std::vector<Instruction> makedInst_;
   //  std::vector<std::pair<std::string, int>> jumps_;
   std::vector<std::pair<std::string, int>> jumps_;
 
@@ -30,7 +30,7 @@ class Parser
 
   void ShowInstructionsLoad();
 
-  void ShowCreateInstructions();
+  void ShowCreatedInstructions();
 
   Instruction IsInstruction(std::string);
   bool IsInst(std::string);
@@ -39,6 +39,8 @@ class Parser
 
   void ShowJumpsTable();
 
-  bool FindJump(std::string);
+  void SetJumps();
+
+  void MakeBinaryFile(std::string);
 };
 
