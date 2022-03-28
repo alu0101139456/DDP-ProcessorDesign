@@ -1,3 +1,4 @@
 *.vcd
 *.out
 Assembler/.vscode
+Assembler/bin/assembler
