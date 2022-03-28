@@ -1,17 +1,16 @@
 #include<instructions.hpp>
 
-
-
 Instruction::Instruction(/* args */) {
 }
 
-// Instruction::Instruction(std::string name, int r1, int r2, int r3, int r4) {
-//   for (size_t i = 0; i < 4; i++)
-//   {
-//     /* code */
-//   }
-  
-// }
+
+Instruction::Instruction(int jump) {
+  name_ = "";
+  isLabel_ = true;
+  inst_.push_back(Register(16, jump));
+}
+
+
 
 Instruction::Instruction(std::string name,std::vector<int> regs, int opcode) {
   name_ = name;
@@ -61,9 +60,29 @@ int Instruction::GetOpcode() {
 }
 
 void Instruction::SetNameJump(std::string rhs) {
+  isJump_ = true;
   nameJump_ = rhs;
 }
 
 std::string Instruction::GetNameJump() {
   return nameJump_;
+}
+
+bool Instruction::IsJump() {
+  return isJump_;
+}
+
+int Instruction::SetDirJump(int rhs) {
+  
+    inst_[1].SetData(rhs);
+  
+  return inst_[1].GetData();
+}
+
+Instruction& Instruction::operator=(const Instruction& rhs) {
+  inst_ = rhs.inst_;
+  name_ = rhs.name_;
+  nameJump_ = rhs.nameJump_;
+  isJump_ = rhs.isJump_;
+  return *this;
 }
