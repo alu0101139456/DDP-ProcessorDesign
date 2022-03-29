@@ -1,7 +1,4 @@
-module alu(input wire [7:0] a, b,
-           input wire [2:0] op_alu,
-           output wire [7:0] y,
-           output wire zero);
+module alu(input wire [7:0] a, b,input wire [2:0] op_alu, output wire [7:0] y, output wire zero);
 
 reg [7:0] s;		   
 		   
