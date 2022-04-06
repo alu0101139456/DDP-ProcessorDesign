@@ -1,0 +1,47 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Wed Mar 30 10:24:40 2022
+[*]
+[dumpfile] "/home/angel/Workspace/4º Año/DDP/P1/DDP-ProcessorDesign/Processor/cpu_tb.vcd"
+[dumpfile_mtime] "Wed Mar 30 10:16:05 2022"
+[dumpfile_size] 22672
+[savefile] "/home/angel/Workspace/4º Año/DDP/P1/DDP-ProcessorDesign/Processor/GTKWaveFiles/cheking.gtkw"
+[timestart] 0
+[size] 1920 1007
+[pos] -1 -408
+*-18.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] cpu_tb.
+[treeopen] cpu_tb.micpu.
+[sst_width] 219
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 285
+@28
+[color] 1
+cpu_tb.clk
+@800200
+-UC
+@22
+cpu_tb.micpu.unidadControl.opcode[5:0]
+@28
+cpu_tb.micpu.unidadControl.s_inc
+cpu_tb.micpu.unidadControl.s_jret
+cpu_tb.micpu.unidadControl.s_ppop
+@c00028
+cpu_tb.micpu.unidadControl.sel_inputs[1:0]
+@28
+(0)cpu_tb.micpu.unidadControl.sel_inputs[1:0]
+(1)cpu_tb.micpu.unidadControl.sel_inputs[1:0]
+@1401200
+-group_end
+@28
+cpu_tb.micpu.unidadControl.we3
+cpu_tb.micpu.unidadControl.we_dstack
+cpu_tb.micpu.unidadControl.we_istack
+cpu_tb.micpu.unidadControl.we_port
+cpu_tb.micpu.unidadControl.wez
+cpu_tb.micpu.unidadControl.z
+@1000200
+-UC
+[pattern_trace] 1
+[pattern_trace] 0

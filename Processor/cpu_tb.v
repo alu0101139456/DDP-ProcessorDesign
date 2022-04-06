@@ -15,6 +15,7 @@ begin
   #30;
 end
 
+
 // instanciación del procesador
 cpu micpu(clk, reset, p0, p1, p2, p3, , , ,);
 

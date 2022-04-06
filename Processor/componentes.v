@@ -46,6 +46,13 @@ module registro #(parameter WIDTH = 8)
 
 endmodule
 
+module registroPC #(parameter ADD = 8) (input wire clk, reset,input wire [9:0] d,output reg [9:0] q);
+  always @(posedge clk, posedge reset)
+    if (reset) q <= ADD;
+    else       q <= d;
+
+endmodule
+
 //modulo multiplexor, si s=1 sale d1, s=0 sale d0
 module mux2 #(parameter WIDTH = 8)
              (input  wire [WIDTH-1:0] d0, d1, 

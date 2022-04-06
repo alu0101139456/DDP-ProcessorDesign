@@ -1,4 +1,4 @@
-module input_module ( input wire clk, reset, input wire [1:0] sel_port, input wire [7:0] in_p0, in_p1, in_p2, in_p3, output wire [7:0] out, output wire interrupt);
+module input_module ( input wire clk, reset, input wire [1:0] sel_port, input wire [7:0] in_p0, in_p1, in_p2, in_p3, output wire [7:0] out);
     
     wire [7:0] p0_2Mux, p1_2Mux, p2_2Mux,p3_2Mux;
 
