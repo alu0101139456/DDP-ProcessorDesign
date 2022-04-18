@@ -1,4 +1,4 @@
-module interruption_module (  input wire clk, reset, i_except, i_port, i_syscall, i_timer, s_finished, input wire [7:0] inmediate_syscall, output wire[9:0] dir_out, output reg s_interruption );
+module interruption_module (  input wire clk, reset, i_except, i_port, i_syscall, i_timer, s_finished, output wire[9:0] dir_out, output reg s_interruption );
 
 //Direcciones de subrutina
 parameter dir_timer     = 10'b1111111010;
@@ -8,16 +8,16 @@ parameter dir_syscall   = 10'b1111111101;
 
 reg [3:0] mask, actions;
 
-reg [9:0] imem[3:0]; // Esta "memoria" es para las llamadas al syscall
-initial
-begin // las ubicaciones se direccionan con la carga de un inmediato
-    imem[0] = 10'b000000000000;
-    imem[1] = 10'b000000000000;
-    imem[2] = 10'b000000000000;
-    imem[3] = 10'b000000000000;
-end
+// reg [9:0] imem[3:0]; // Esta "memoria" es para las llamadas al syscall
+// initial
+// begin // las ubicaciones se direccionan con la carga de un inmediato
+//     imem[0] = 10'b000000000000;
+//     imem[1] = 10'b000000000000;
+//     imem[2] = 10'b000000000000;
+//     imem[3] = 10'b000000000000;
+// end
 
-reg [7:0] inm;
+// reg [7:0] inm;
 
 always @(reset, i_except, i_port, i_syscall, i_timer, s_finished) begin
     if (reset) begin
@@ -32,9 +32,9 @@ always @(reset, i_except, i_port, i_syscall, i_timer, s_finished) begin
         actions <= { i_except, i_port, i_syscall, i_timer} | actions;
     end
 
-    if (i_syscall) 
-        inm <= inmediate_syscall;
-    end
+    // if (i_syscall) 
+    //     inm <= inmediate_syscall;
+    // end
 
 end
 
@@ -87,7 +87,7 @@ begin
         else if (actions[1]) begin //i_syscall
             if (~active) begin
                 mask <= 4'b1101;
-                dirAux <= imem[inm];
+                dirAux <= dir_syscall;
                 s_interruption <= 1'b1;
                 #1;
             end

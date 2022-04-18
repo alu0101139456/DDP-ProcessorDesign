@@ -1,5 +1,5 @@
 module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, s_we_stack, s_jalret, s_we_stack_data,  s_pushpop, input wire [2:0] op_alu, input wire [1:0] sel_inputs, 
-    input wire [7:0] in_p0, in_p1, in_p2, in_p3, output wire z, output wire [5:0] opcode, output wire [7:0] out_p0, out_p1, out_p2, out_p3);
+    input wire [7:0] in_p0, in_p1, in_p2, in_p3, output wire z, s_interruption, output wire [5:0] opcode, output wire [7:0] out_p0, out_p1, out_p2, out_p3);
 //Camino de datos de instrucciones de un solo ciclo
 //Nomenclatura 
 
@@ -17,7 +17,7 @@ module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, s_we_stack, s_jalre
     assign RA1[3:0] = instruccion[11:8];
     assign inm_to_mux4 = instruccion[11:4];
     assign io_port = instruccion[9:8];
-    assign inmediate_for_syscall[7:0] = instruccion[7:0];
+    // assign inmediate_for_syscall[7:0] = instruccion[7:0];
 
     registro #(10) PC_REGISTER(clk, reset, mux1_to_pc, dir );
     mux2 #(10) MUX_PC(jump_address, dir_in, s_inc, mux1_to_pc);
@@ -39,7 +39,7 @@ module cd(input wire clk, reset, s_inc, we3, wez, s_we_port, s_we_stack, s_jalre
     
     stack_module #(8,64) STACK_DATA(clk, reset, s_we_stack_data, s_pushpop, RD2, stack_to_mux4);
 
-    interruption_module INTER(clk, reset,  i_except, i_port, i_syscall, s_finished, inmediate_for_syscall, dir_from_exception, s_interruption );
+    interruption_module INTER(clk, reset,  i_except, i_port, i_syscall, s_finished, dir_from_exception, s_interruption );
 
     mux2 #(10) MUX_FOR_INTERRUPTIONS( dir_salto, dir_from_exception, s_use_interr, mux_int_mux_jump);
 
