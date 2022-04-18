@@ -22,36 +22,27 @@ reg [3:0] mask, actions;
 always @(reset, i_except, i_port, i_syscall, i_timer, s_finished) begin
     if (reset) begin
         actions <= 0;
-        inm <= 0;
         mask <= 4'b1111;
     end
-    else if (s_finished)  //Termina y bajo el flag activo
+    else if (s_finished) begin  //Termina y bajo el flag activo
         actions <= actions & mask;
     end
     else 
         actions <= { i_except, i_port, i_syscall, i_timer} | actions;
-    end
-
-    // if (i_syscall) 
-    //     inm <= inmediate_syscall;
-    // end
-
 end
 
-reg [9:0] dir_aux;
+reg [9:0] dirAux;
 reg active;
 
 // ACTIONS [ i_except, i_port, i_syscall, i_timer]
 
 always @(reset, actions, s_finished)
 begin
-    if (reset)
-    begin
+    if (reset) begin
         active <= 1'b0;
         dirAux <= 10'bx;    
     end
-    else
-    begin
+    else begin
         if (active && s_finished )
             active = 1'b0;
         else if ((active && ~s_finished) || ~active)
@@ -92,10 +83,12 @@ begin
                 #1;
             end
             active <= 1'b1;
-         else 
-            dirAux <= 10'bx;
+        end
+        else 
+            dirAux <= 10'bx;         
     end
 end
+
 
 assign dir_out = dirAux;
 

@@ -1,25 +1,25 @@
-module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_inc, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, use_dir_interr
+module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_inc, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, use_dir_interr,
     output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port);
 
-parameter ARITH   = 11'b100110000000; 
-parameter LOADINM = 11'b111100000000; 
-parameter JUMP    = 11'b000000000000; 
-parameter NOJUMP  = 11'b100000000000; 
-parameter IN      = 11'b101100000000;
-parameter OUT     = 11'b100001000000;
-parameter NOP     = 11'b000000000000;
-parameter JAL     = 11'b000000100000;
-parameter RET     = 11'b000000110000;
-parameter PUSH    = 11'b100000001000;
-parameter POP     = 11'b110100001100;
-parameter SYSCALL = 11'b000000100010;
-parameter FNSH    = 11'b000000000001;
+parameter ARITH   = 12'b100110000000; 
+parameter LOADINM = 12'b111100000000; 
+parameter JUMP    = 12'b000000000000; 
+parameter NOJUMP  = 12'b100000000000; 
+parameter IN      = 12'b101100000000;
+parameter OUT     = 12'b100001000000;
+parameter NOP     = 12'b000000000000;
+parameter JAL     = 12'b000000100000;
+parameter RET     = 12'b000000110000;
+parameter PUSH    = 12'b100000001000;
+parameter POP     = 12'b110100001100;
+parameter SYSCALL = 12'b000000100010;
+parameter FNSH    = 12'b000000000001;
 
 reg [3:0] operation;
 
 reg [9:0] signals; // ver si hace falta inicializarlo
 
-assign {s_inc, sel_inputs[1], sel_inputs[0], we3, wez, we_port, we_istack, s_jret, we_dstack, s_ppop, use_dir_interr,s_finish_interr} = signals;
+assign {s_inc, sel_inputs[1], sel_inputs[0], we3, wez, we_port, we_istack, s_jret, we_dstack, s_ppop, use_dir_interr, s_finish_interr} = signals;
 
 always @(opcode) begin
     if (s_interruption)
