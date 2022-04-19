@@ -8,16 +8,12 @@ Parser::Parser(std::string fileInstructions, std::string fileAssambler, std::str
   if(LoadInstructionsFromFile(fileInstructions)&&LoadAssamblerFromFile(fileAssambler)){
     std::cout << "Instrucciones leidas correctamente" << std::endl;
     SetJumps();
-    ShowJumpsTable();
+    // ShowJumpsTable();
   }else {
     std::cout << "Fallo al cargar instrucciones" << std::endl;
   }
 
-  // ShowInstructionsLoad();
   // ShowCreatedInstructions();
-  // ShowJumpsTable();
-  // SetJumps();
-  ShowCreatedInstructions();
   MakeBinaryFile(fileOutput);
 }
 
@@ -61,18 +57,18 @@ bool Parser::LoadInstructionsFromFile(std::string fileInstructions) {
 }
 
 void Parser::ShowInstructionsLoad(void) {
-  std::cout << "Hay " << instructions_.size() << " instrucciones cargadas" << std::endl;
+  if(dev) std::cout << "Hay " << instructions_.size() << " instrucciones cargadas" << std::endl;
 
   for (size_t i = 0; i < instructions_.size(); i++) {
-    std::cout << instructions_[i].GetName();
+    if(dev) std::cout << instructions_[i].GetName();
     for (size_t j = 0; j < instructions_[i].GetRegisters().size(); j++) {
       if(instructions_[i].GetRegisters().at(j).GetSize() > 0) {
-      std::cout << " R" << j << "= " << instructions_[i].GetRegisters().at(j).GetSize() << " ";
+      if(dev) std::cout << " R" << j << "= " << instructions_[i].GetRegisters().at(j).GetSize() << " ";
       
-      std::cout << " D[" << std::setfill('0') << std::setw(instructions_[i].GetRegisters().at(j).GetSize()) << instructions_[i].GetRegisters()[j].GetData() << "] ";
+      if(dev) std::cout << " D[" << std::setfill('0') << std::setw(instructions_[i].GetRegisters().at(j).GetSize()) << instructions_[i].GetRegisters()[j].GetData() << "] ";
       }
     }
-    std::cout << '\n';
+    if(dev) std::cout << '\n';
      
   }
   
@@ -81,16 +77,16 @@ void Parser::ShowInstructionsLoad(void) {
 void Parser::ShowCreatedInstructions(void) {
   
   for (size_t i = 0; i < makedInst_.size(); i++) {
-    std::cout << makedInst_[i].GetName();
-    if (instructions_[i].GetName() == "" ) std::cout << "Etiqueta";
+    if(dev) std::cout << makedInst_[i].GetName();
+    if(!dev) if (instructions_[i].GetName() == "" ) std::cout << "Etiqueta";
     for (size_t j = 0; j < makedInst_[i].GetRegisters().size(); j++) {
       if(makedInst_[i].GetRegisters().at(j).GetSize() > 0) {
-      std::cout << " R" << j << " Sz=" << makedInst_[i].GetRegisters().at(j).GetSize() << " ";
+      if(dev) std::cout << " R" << j << " Sz=" << makedInst_[i].GetRegisters().at(j).GetSize() << " ";
       
-      std::cout << " D[" << std::setfill('0') << std::setw(makedInst_[i].GetRegisters().at(j).GetSize()) << makedInst_[i].GetRegisters()[j].GetData() << "] ";
+      if(dev) std::cout << " D[" << std::setfill('0') << std::setw(makedInst_[i].GetRegisters().at(j).GetSize()) << makedInst_[i].GetRegisters()[j].GetData() << "] ";
       }
     }
-    std::cout << '\n';
+    if(dev) std::cout << '\n';
      
   }
   
@@ -107,11 +103,8 @@ void Parser::MakeBinaryFile(std::string outFile) {
   }
   int i =0;
   out << "0000000000000000";
-  while ( i < (1023 - makedInst_.size()))
-  {
-
+  while ( i < (1023 - makedInst_.size())) {
     out << "\n0000000000000000";
-    
     i++;
   }
   
@@ -132,7 +125,7 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
   
   std::string aux;
   while (std::getline(file, aux)) {
-    std::cout << "linea = " << line << "\n";
+    if(dev) std::cout << "linea = " << line << "\n";
     
     int j=0;
     std::stringstream ss(aux);
@@ -141,32 +134,32 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
       aux.erase(remove(aux.begin(), aux.end(), ','), aux.end());
       if(IsInst(aux)) {
         temp = IsInstruction(aux);
-        std::cout << "Encontrado " << temp.GetName() << " con opcode: " << temp.GetOpcode() << std::endl;
-        std::cout << "Registros con valores: ";
+        if(dev) std::cout << "Encontrado " << temp.GetName() << " con opcode: " << temp.GetOpcode() << std::endl;
+        if(dev) std::cout << "Registros con valores: ";
         for (size_t i = 0; i < temp.GetRegisters().size(); i++ ){
-          std::cout << temp.GetRegisters().at(i).GetSize();
+          if(dev) std::cout << temp.GetRegisters().at(i).GetSize();
         }
-        std::cout << std::endl;
+        if(dev) std::cout << std::endl;
       }
       if( temp.GetName() == aux )  {
         isSame = true;
         temp.SetName(aux);
-        std::cout << "Instruction: " << temp.GetName();
+        if(dev) std::cout << "Instruction: " << temp.GetName();
         if (IsJump(temp.GetName())) {
           std::getline(ss, aux, ' ');
           temp.SetNameJump(aux);
         }
       }
       else if( aux.find('R') != std::string::npos && isSame) {
-        std::cout << "Register " ;
+        if(dev) std::cout << "Register " ;
         aux.erase(remove(aux.begin(), aux.end(), 'R'), aux.end());
-        std::cout << ConvertToBinary(aux) << " ->";
-        std::cout << "Selecionado registro: " << j << std::endl;
+        if(dev) std::cout << ConvertToBinary(aux) << " ->";
+        if(dev) std::cout << "Selecionado registro: " << j << std::endl;
         
-        std::cout << "Tamaño del registro: " << temp.GetRegisters().at(j).GetSize() << std::endl;
+        if(dev) std::cout << "Tamaño del registro: " << temp.GetRegisters().at(j).GetSize() << std::endl;
         if(temp.GetRegisters().at(j).GetSize() == 0) { 
           j++;
-          std::cout << "Tamaño del registro: " << temp.GetRegisters().at(j).GetSize() << std::endl;
+          if(dev) std::cout << "Tamaño del registro: " << temp.GetRegisters().at(j).GetSize() << std::endl;
         }
         Register regTemp(temp.GetRegisters().at(j).GetSize());
         regTemp.SetData(ConvertToBinary(aux));
@@ -177,12 +170,12 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
         aux.erase(remove(aux.begin(), aux.end(), ':'), aux.end());
         // line--;
         if(isSame) {
-          std::cout << "EtiquetaXXX \"" << aux << "\" en linea " << line  << std::endl;
+          if(dev) std::cout << "EtiquetaXXX \"" << aux << "\" en linea " << line  << std::endl;
           temp.SetNameJump(aux);
           
         }else {
           jumps_.push_back(std::pair<std::string, int>(aux, line));
-          std::cout << "\""<< aux << "\" en línea : " << line << std::endl;
+          if(dev) std::cout << "\""<< aux << "\" en línea : " << line << std::endl;
           temp.SetNameJump(aux);
           // std::vector<Instruction>::iterator it = makedInst_.end();
           // it->SetNameJump(aux);
@@ -192,15 +185,15 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
 
       }
       else {
-        std::cout << "Number: " ;
-        std::cout << ConvertToBinary(aux) << " ->";
-        std::cout << "Selecionado registro: " << j << std::endl;
+        if(dev) std::cout << "Number: " ;
+        if(dev) std::cout << ConvertToBinary(aux) << " ->";
+        if(dev) std::cout << "Selecionado registro: " << j << std::endl;
         Register regTemp(temp.GetRegisters().at(j).GetSize());
         regTemp.SetData(ConvertToBinary(aux));
         temp.SetRegister().at(j) = regTemp;
       }
       j++;     
-      std::cout << std::endl;
+      if(dev) std::cout << std::endl;
     }
     if (!jump) makedInst_.push_back(temp);
     jump = false;
@@ -269,15 +262,14 @@ void Parser::ShowJumpsTable() {
 
 void Parser::SetJumps() {
 
-  std::cout << "Numero de instrucciones creadas: " << makedInst_.size() << std::endl;
   for (size_t j = 0; j < makedInst_.size(); j++) {
     for (size_t i = 0; i < jumps_.size(); i++) {
       if( (jumps_[i].first == makedInst_[j].GetNameJump()) && IsJump(makedInst_[j].GetName())) {
-        std::cout << jumps_[i].first << "=="<< makedInst_[j].GetNameJump() << std::endl;
-        std::cout << "Numero decimal: " << jumps_[i].second << " Numero binario: " <<  ConvertToBinary(std::to_string(jumps_[i].second)) << std::endl; 
-        std::cout << makedInst_[j].GetName() << " dir " << makedInst_[j].GetDirJump() << std::endl;
+        // std::cout << jumps_[i].first << "=="<< makedInst_[j].GetNameJump() << std::endl;
+        // std::cout << "Numero decimal: " << jumps_[i].second << " Numero binario: " <<  ConvertToBinary(std::to_string(jumps_[i].second)) << std::endl; 
+        // std::cout << makedInst_[j].GetName() << " dir " << makedInst_[j].GetDirJump() << std::endl;
         makedInst_[j].SetDirJump(ConvertToBinary(std::to_string(jumps_[i].second)));
-        std::cout << makedInst_[j].GetDirJump() << std::endl;
+        // std::cout << makedInst_[j].GetDirJump() << std::endl;
       }
     
 
@@ -291,9 +283,8 @@ void Parser::SetJumps() {
 
 bool Parser::IsJump( std::string aux) {  
   for (size_t i = 0; i < saltos_.size(); i++) {
-    std::cout << "Is " << aux << " == " << saltos_[i] << "?\n";
     if(aux == saltos_[i]) {
-      std::cout << "Is " << aux << " == " << saltos_[i] << "!\n";
+      // std::cout << "Is " << aux << " == " << saltos_[i] << "!\n";
       return true; 
     }
   }
