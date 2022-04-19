@@ -8,6 +8,7 @@ Parser::Parser(std::string fileInstructions, std::string fileAssambler, std::str
   if(LoadInstructionsFromFile(fileInstructions)&&LoadAssamblerFromFile(fileAssambler)){
     std::cout << "Instrucciones leidas correctamente" << std::endl;
     SetJumps();
+    ShowJumpsTable();
   }else {
     std::cout << "Fallo al cargar instrucciones" << std::endl;
   }
@@ -15,7 +16,7 @@ Parser::Parser(std::string fileInstructions, std::string fileAssambler, std::str
   // ShowInstructionsLoad();
   // ShowCreatedInstructions();
   // ShowJumpsTable();
-  
+  // SetJumps();
   ShowCreatedInstructions();
   MakeBinaryFile(fileOutput);
 }
@@ -104,6 +105,16 @@ void Parser::MakeBinaryFile(std::string outFile) {
     }
     out << '\n';
   }
+  int i =0;
+  out << "0000000000000000";
+  while ( i < (1023 - makedInst_.size()))
+  {
+
+    out << "\n0000000000000000";
+    
+    i++;
+  }
+  
   out.close();
 }
 
@@ -141,6 +152,10 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
         isSame = true;
         temp.SetName(aux);
         std::cout << "Instruction: " << temp.GetName();
+        if (IsJump(temp.GetName())) {
+          std::getline(ss, aux, ' ');
+          temp.SetNameJump(aux);
+        }
       }
       else if( aux.find('R') != std::string::npos && isSame) {
         std::cout << "Register " ;
@@ -160,15 +175,19 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
       } 
       else if (aux.find(':') != std::string::npos) {
         aux.erase(remove(aux.begin(), aux.end(), ':'), aux.end());
+        // line--;
         if(isSame) {
-          std::cout << "Etiqueta \"" << aux << "\" en linea " << line  << std::endl;
+          std::cout << "EtiquetaXXX \"" << aux << "\" en linea " << line  << std::endl;
           temp.SetNameJump(aux);
           
         }else {
           jumps_.push_back(std::pair<std::string, int>(aux, line));
           std::cout << "\""<< aux << "\" en línea : " << line << std::endl;
-          Instruction aux(ConvertToBinary(std::to_string(line)));
-          temp = aux;
+          temp.SetNameJump(aux);
+          // std::vector<Instruction>::iterator it = makedInst_.end();
+          // it->SetNameJump(aux);
+          // Instruction aux(ConvertToBinary(std::to_string(line)));
+          jump = true;
         }
 
       }
@@ -183,9 +202,8 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
       j++;     
       std::cout << std::endl;
     }
-    
-    makedInst_.push_back(temp);
-
+    if (!jump) makedInst_.push_back(temp);
+    jump = false;
     line++;
   }
     
@@ -251,14 +269,33 @@ void Parser::ShowJumpsTable() {
 
 void Parser::SetJumps() {
 
-  for (size_t i = 0; i < jumps_.size(); i++) {
-    for (size_t k = 0; k < makedInst_.size(); k++) {
-      if(makedInst_[k].IsJump() && (makedInst_[k].GetNameJump() == jumps_[i].first)) {
-        makedInst_[k].SetDirJump(ConvertToBinary(std::to_string(jumps_[i].second)));
+  std::cout << "Numero de instrucciones creadas: " << makedInst_.size() << std::endl;
+  for (size_t j = 0; j < makedInst_.size(); j++) {
+    for (size_t i = 0; i < jumps_.size(); i++) {
+      if( (jumps_[i].first == makedInst_[j].GetNameJump()) && IsJump(makedInst_[j].GetName())) {
+        std::cout << jumps_[i].first << "=="<< makedInst_[j].GetNameJump() << std::endl;
+        std::cout << "Numero decimal: " << jumps_[i].second << " Numero binario: " <<  ConvertToBinary(std::to_string(jumps_[i].second)) << std::endl; 
+        std::cout << makedInst_[j].GetName() << " dir " << makedInst_[j].GetDirJump() << std::endl;
+        makedInst_[j].SetDirJump(ConvertToBinary(std::to_string(jumps_[i].second)));
+        std::cout << makedInst_[j].GetDirJump() << std::endl;
       }
+    
+
     }
     
   }
+  
    
 
+}
+
+bool Parser::IsJump( std::string aux) {  
+  for (size_t i = 0; i < saltos_.size(); i++) {
+    std::cout << "Is " << aux << " == " << saltos_[i] << "?\n";
+    if(aux == saltos_[i]) {
+      std::cout << "Is " << aux << " == " << saltos_[i] << "!\n";
+      return true; 
+    }
+  }
+  return false;  
 }

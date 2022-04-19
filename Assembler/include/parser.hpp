@@ -20,7 +20,8 @@ class Parser
    std::vector<Instruction> makedInst_;
   //  std::vector<std::pair<std::string, int>> jumps_;
   std::vector<std::pair<std::string, int>> jumps_;
-
+  std::vector<std::string> saltos_ = {"JUMP", "BEZ", "BNZ", "JAL"} ;
+  bool jump = false;
 
  public:
   Parser(std::string, std::string, std::string);
@@ -35,6 +36,8 @@ class Parser
   Instruction IsInstruction(std::string);
   bool IsInst(std::string);
   
+  bool IsJump(std::string);
+
   int ConvertToBinary(std::string);
 
   void ShowJumpsTable();
@@ -42,5 +45,6 @@ class Parser
   void SetJumps();
 
   void MakeBinaryFile(std::string);
+
 };
 

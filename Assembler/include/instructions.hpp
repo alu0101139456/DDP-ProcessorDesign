@@ -25,12 +25,12 @@ class Instruction
   void DelInst();
   std::vector<Register>& SetRegister();
   int GetOpcode();
-
+  int GetDirJump();
   void SetNameJump(std::string);
   bool IsJump();
   bool IsLabel();
   std::string GetNameJump();
-  int SetDirJump(int);
+  void SetDirJump(int);
   Instruction& operator=(const Instruction& rhs);
   
 };

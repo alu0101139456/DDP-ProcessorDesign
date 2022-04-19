@@ -1,0 +1,6 @@
+JAL prueba1  
+LI 4, R1
+JUMP fin 
+:prueba1 
+RET 
+:fin

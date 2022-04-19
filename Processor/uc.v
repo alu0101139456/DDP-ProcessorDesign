@@ -1,25 +1,25 @@
-module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_inc, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, use_dir_interr,
+module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_4mux1, s_4mux2, s_4mux3, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, 
     output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port);
 
-parameter ARITH   = 12'b100110000000; 
-parameter LOADINM = 12'b111100000000; 
-parameter JUMP    = 12'b000000000000; 
-parameter NOJUMP  = 12'b100000000000; 
-parameter IN      = 12'b101100000000;
-parameter OUT     = 12'b100001000000;
-parameter NOP     = 12'b000000000000;
-parameter JAL     = 12'b000000100000;
-parameter RET     = 12'b000000110000;
-parameter PUSH    = 12'b100000001000;
-parameter POP     = 12'b110100001100;
-parameter SYSCALL = 12'b000000100010;
-parameter FNSH    = 12'b000000000001;
+parameter ARITH   = 13'b1000011000000; 
+parameter LOADINM = 13'b1001110000000; 
+parameter JUMP    = 13'b0100000000000; 
+parameter NOJUMP  = 13'b1100000000000; 
+parameter IN      = 13'b1000110000000;
+parameter OUT     = 13'b1000000100000;
+parameter NOP     = 13'b0000000000000;
+parameter JAL     = 13'b0100000010000;
+parameter RET     = 13'b1010000011000;
+parameter PUSH    = 13'b1000000000100;
+parameter POP     = 13'b1001010000110;
+parameter SYSCALL = 13'b0000000010000;
+parameter FNSH    = 13'b0000000011001;
 
 reg [3:0] operation;
 
-reg [9:0] signals; // ver si hace falta inicializarlo
+reg [12:0] signals; // ver si hace falta inicializarlo
 
-assign {s_inc, sel_inputs[1], sel_inputs[0], we3, wez, we_port, we_istack, s_jret, we_dstack, s_ppop, use_dir_interr, s_finish_interr} = signals;
+assign {s_4mux1, s_4mux2, s_4mux3, sel_inputs[1], sel_inputs[0], we3, wez, we_port, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr} = signals;
 
 always @(opcode) begin
     if (s_interruption)
@@ -33,7 +33,7 @@ always @(opcode) begin
             6'b1000??: // carga de inmediato
                 signals = LOADINM;
 
-            6'b10010?: // salto condicional
+            6'b10010?: // salto condicional 
                 begin
                     if (opcode[0] == 0) // branch equal zero
                         if(z)

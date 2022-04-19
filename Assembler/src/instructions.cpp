@@ -67,16 +67,16 @@ void Instruction::SetNameJump(std::string rhs) {
 std::string Instruction::GetNameJump() {
   return nameJump_;
 }
+int Instruction::GetDirJump() {  
+  return inst_[1].GetData();
+}
 
 bool Instruction::IsJump() {
   return isJump_;
 }
 
-int Instruction::SetDirJump(int rhs) {
-  
-    inst_[1].SetData(rhs);
-  
-  return inst_[1].GetData();
+void Instruction::SetDirJump(int rhs) {
+  inst_[1].SetData(rhs);
 }
 
 Instruction& Instruction::operator=(const Instruction& rhs) {
