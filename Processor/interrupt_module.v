@@ -1,7 +1,7 @@
 module interruption_module (  input wire clk, reset, i_except, i_port, i_syscall, i_timer, s_finished, output wire[9:0] dir_out, output reg s_interruption );
 
 //Direcciones de subrutina
-parameter dir_timer     = 10'b1111111010;
+parameter dir_timer     = 10'b0000010011;
 parameter dir_exception = 10'b1111111011;
 parameter dir_port      = 10'b1111111100;
 parameter dir_syscall   = 10'b1111111101;

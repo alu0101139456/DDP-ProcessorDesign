@@ -1,17 +1,18 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Wed Mar 30 10:24:40 2022
+[*] Tue Apr 19 21:22:45 2022
 [*]
 [dumpfile] "/home/angel/Workspace/4º Año/DDP/P1/DDP-ProcessorDesign/Processor/cpu_tb.vcd"
-[dumpfile_mtime] "Wed Mar 30 10:16:05 2022"
-[dumpfile_size] 22672
+[dumpfile_mtime] "Tue Apr 19 21:20:54 2022"
+[dumpfile_size] 40017
 [savefile] "/home/angel/Workspace/4º Año/DDP/P1/DDP-ProcessorDesign/Processor/GTKWaveFiles/cheking.gtkw"
 [timestart] 0
-[size] 1920 1007
-[pos] -1 -408
+[size] 1920 1001
+[pos] -1 -402
 *-18.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.micpu.
+[treeopen] cpu_tb.micpu.CAMINO_DATOS.
 [sst_width] 219
 [signals_width] 150
 [sst_expanded] 1
@@ -24,7 +25,6 @@ cpu_tb.clk
 @22
 cpu_tb.micpu.unidadControl.opcode[5:0]
 @28
-cpu_tb.micpu.unidadControl.s_inc
 cpu_tb.micpu.unidadControl.s_jret
 cpu_tb.micpu.unidadControl.s_ppop
 @c00028
@@ -43,5 +43,19 @@ cpu_tb.micpu.unidadControl.wez
 cpu_tb.micpu.unidadControl.z
 @1000200
 -UC
+@800200
+-DataStack
+@28
+cpu_tb.micpu.CAMINO_DATOS.RA1[3:0]
+cpu_tb.micpu.CAMINO_DATOS.RA2[3:0]
+cpu_tb.micpu.CAMINO_DATOS.WA3[3:0]
+@24
+cpu_tb.micpu.CAMINO_DATOS.RD1[7:0]
+cpu_tb.micpu.CAMINO_DATOS.RD2[7:0]
+cpu_tb.micpu.CAMINO_DATOS.WD3[7:0]
+cpu_tb.micpu.CAMINO_DATOS.STACK_DATA.data_in[7:0]
+cpu_tb.micpu.CAMINO_DATOS.STACK_DATA.data_out[7:0]
+@1000200
+-DataStack
 [pattern_trace] 1
 [pattern_trace] 0

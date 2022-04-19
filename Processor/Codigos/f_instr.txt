@@ -1,6 +1,20 @@
-JAL prueba1  
-LI 4, R1
-JUMP fin 
-:prueba1 
-RET 
-:fin
+:inicio
+LI 10, R3
+PUSH 2, R3 
+LI 50, R4
+PUSH 2, R4
+JUMP inicio
+
+
+
+
+
+
+
+
+
+
+
+
+
+LI 13, R1

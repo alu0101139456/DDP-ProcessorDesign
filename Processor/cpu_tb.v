@@ -36,7 +36,7 @@ begin
   p0 = 8'b00001000;
   p1 = 8'b00000100;
   
-  #(32*60);  //Esperamos 9 ciclos o 9 instrucciones
+  #(32*120);  //Esperamos 9 ciclos o 9 instrucciones
   $finish;
 end
 
