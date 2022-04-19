@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-./assembler Instrucciones.txt test progfile.dat
+./assembler Instrucciones.txt f_instr.txt ../progfile.dat
