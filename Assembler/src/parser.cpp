@@ -8,12 +8,12 @@ Parser::Parser(std::string fileInstructions, std::string fileAssambler, std::str
   if(LoadInstructionsFromFile(fileInstructions)&&LoadAssamblerFromFile(fileAssambler)){
     std::cout << "Instrucciones leidas correctamente" << std::endl;
     SetJumps();
-    ShowJumpsTable();
+    if(dev) ShowJumpsTable();
   }else {
     std::cout << "Fallo al cargar instrucciones" << std::endl;
   }
 
-  ShowCreatedInstructions();
+  if(dev) ShowCreatedInstructions();
   MakeBinaryFile(fileOutput);
 }
 
@@ -77,16 +77,16 @@ void Parser::ShowInstructionsLoad(void) {
 void Parser::ShowCreatedInstructions(void) {
   
   for (size_t i = 0; i < makedInst_.size(); i++) {
-    if(dev) std::cout << makedInst_[i].GetName();
+    std::cout << makedInst_[i].GetName();
     if(!dev) if (instructions_[i].GetName() == "" ) std::cout << "Etiqueta";
     for (size_t j = 0; j < makedInst_[i].GetRegisters().size(); j++) {
       if(makedInst_[i].GetRegisters().at(j).GetSize() > 0) {
-      if(dev) std::cout << " R" << j << " Sz=" << makedInst_[i].GetRegisters().at(j).GetSize() << " ";
+      std::cout << " R" << j << " Sz=" << makedInst_[i].GetRegisters().at(j).GetSize() << " ";
       
-      if(dev) std::cout << " D[" << std::setfill('0') << std::setw(makedInst_[i].GetRegisters().at(j).GetSize()) << makedInst_[i].GetRegisters()[j].GetData() << "] ";
+      std::cout << " D[" << std::setfill('0') << std::setw(makedInst_[i].GetRegisters().at(j).GetSize()) << makedInst_[i].GetRegisters()[j].GetData() << "] ";
       }
     }
-    if(dev) std::cout << '\n';
+    std::cout << '\n';
      
   }
   
@@ -126,10 +126,9 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
   
   std::string aux;
   while (std::getline(file, aux)) {
-    temp.SetEmpty();
+    
     if(dev) std::cout << "linea = " << line << "\n";
     if (aux == "") {
-      std::cout << "ENTRA EN VACIO  CON EL OPCODE : " << temp.GetOpcode() << "\n";
       empty = true;
       temp.SetEmpty();
       line++;
@@ -155,11 +154,9 @@ bool Parser::LoadAssamblerFromFile(std::string fileAssambler) {
         temp.SetName(aux);
         if(dev) std::cout << "Instruction: " << temp.GetName();
         if (IsJump(temp.GetName())) {
-          std::cout << " Es un salto asi que se guarda: " << aux;
           std::getline(ss, aux, ' ');
-          std::cout << " con siguiente linea: >> "<< aux << " fin de linea y seteamos:"; 
           temp.SetNameJump(aux);
-          std::cout << "Nos queda temp.name=  " << temp.GetName() << " temp.GetNameJump= " << temp.GetNameJump() << " en linea: " << line << std::endl;
+          if(dev) std::cout << "Nos queda temp.name=  " << temp.GetName() << " temp.GetNameJump= " << temp.GetNameJump() << " en linea: " << line << std::endl;
           
         }
         line++;

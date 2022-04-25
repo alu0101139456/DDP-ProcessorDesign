@@ -22,7 +22,7 @@ class Parser
   std::vector<std::pair<std::string, int>> jumps_;
   std::vector<std::string> saltos_ = {"JUMP", "BEZ", "BNZ", "JAL"} ;
   bool jump = false;
-  bool dev = true;
+  bool dev = false;
 
  public:
   Parser(std::string, std::string, std::string);
