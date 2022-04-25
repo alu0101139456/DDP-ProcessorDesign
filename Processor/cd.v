@@ -1,4 +1,4 @@
-module cd(input wire clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, s_we_port, s_we_stack, s_jalret, s_we_stack_data,  s_pushpop, i_timer, input wire [2:0] op_alu, input wire [1:0] sel_inputs, 
+module cd(input wire clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, s_we_port, s_we_stack, s_jalret, s_we_stack_data,  s_pushpop, i_timer, s_finish_interr, input wire [2:0] op_alu, input wire [1:0] sel_inputs, 
     input wire [7:0] in_p0, in_p1, in_p2, in_p3, output wire z, s_interruption, output wire [5:0] opcode, output wire [7:0] out_p0, out_p1, out_p2, out_p3);
 //Camino de datos de instrucciones de un solo ciclo
 //Nomenclatura 
@@ -28,7 +28,7 @@ module cd(input wire clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, s_we_port,
     mux2 #(10)         MUX_2(dir_from_exception, dir_salto, s_4mux2, mux2_mux1 ); //s_jalret
     mux2 #(10)         MUX_3(dir_in, dir_out, s_4mux3, mux3_mux1 );
     
-    interruption_module INTER(clk, reset,  i_except, i_port, i_syscall, i_timer, s_finished, dir_from_exception, s_interruption );
+    interruption_module INTER(clk, reset,  i_except, i_port, i_syscall, i_timer, s_finish_interr, dir_from_exception, s_interruption );
 
 
     ffd FFD(clk, reset, ZALU, wez, z);

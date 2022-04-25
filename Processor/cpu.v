@@ -10,7 +10,7 @@ uc unidadControl(opcode, z, s_interruption, s_4mux1, s_4mux2, s_4mux3 ,we3, wez,
 
 // cd caminoDatos(clk, reset,s_inc,s_inm,we3, wez, op_alu,z,opcode);
 
-cd CAMINO_DATOS(clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, we_port, s_we_stack, s_jret, s_we_stack_data, s_ppop, i_timer, op_alu, sel_inputs, in_p0, in_p1, in_p2, in_p3, z, s_interruption,
+cd CAMINO_DATOS(clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, we_port, s_we_stack, s_jret, s_we_stack_data, s_ppop, i_timer, s_finish_interr, op_alu, sel_inputs, in_p0, in_p1, in_p2, in_p3, z, s_interruption,
            opcode, out_p0, out_p1, out_p2, out_p3);
 
 timer TIMER (clk, reset, 8'd10, i_timer );

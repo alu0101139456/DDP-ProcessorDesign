@@ -12,18 +12,27 @@ parameter JAL     = 13'b0100000010000;
 parameter RET     = 13'b1010000011000;
 parameter PUSH    = 13'b1000000000100;
 parameter POP     = 13'b1001010000110;
-parameter SYSCALL = 13'b0000000010000;
-parameter FNSH    = 13'b0000000011001;
+parameter INTERR  = 13'b0000000010000;
+parameter FNSH    = 13'b1010000011001;
 
 reg [3:0] operation;
 
 reg [12:0] signals; // ver si hace falta inicializarlo
 
+reg onInterrupt = 0;
+reg onFinish = 0;
+
 assign {s_4mux1, s_4mux2, s_4mux3, sel_inputs[1], sel_inputs[0], we3, wez, we_port, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr} = signals;
 
-always @(opcode) begin
-    if (s_interruption)
-        signals = SYSCALL;
+always @(opcode, s_interruption) begin
+    if (onFinish & !s_finish_interr) begin
+        onInterrupt = 0;
+        onFinish = 0;
+    end;
+    if (s_interruption && !onInterrupt) begin
+        signals = INTERR;
+        onInterrupt = 1;
+    end
     else begin
         op_alu = opcode[4:2];
         casez (opcode)
@@ -63,11 +72,11 @@ always @(opcode) begin
                 signals = PUSH;
             6'b101100:
                 signals = POP;
-            6'b101101:
-                signals = SYSCALL;
             6'b101110:
-                signals = FNSH;
-
+                begin
+                    signals = FNSH;
+                    onFinish = 1;
+                end
             default: 
                 signals = NOP; 
         endcase

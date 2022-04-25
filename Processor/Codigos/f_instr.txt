@@ -1,9 +1,11 @@
 :inicio
-LI 10, R3
-PUSH 2, R3 
-LI 50, R4
-PUSH 2, R4
-JUMP inicio
+JAL pepe
+LI 4, R1
+JUMP fin
+:pepe
+LI 10, R2
+RET
+:fin
 
 
 
@@ -14,7 +16,6 @@ JUMP inicio
 
 
 
-
-
-
-LI 13, R1
+LI 7, R9
+FNSH
+RET
