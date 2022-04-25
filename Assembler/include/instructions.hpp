@@ -18,7 +18,7 @@ class Instruction
   Instruction(std::string name,std::vector<int> regs, int);
   Instruction(std::string name,std::vector<Register> regs, int);
   ~Instruction();
-
+  
   std::string GetName();
   void SetName(std::string);
   std::vector<Register> GetRegisters();
@@ -32,6 +32,6 @@ class Instruction
   std::string GetNameJump();
   void SetDirJump(int);
   Instruction& operator=(const Instruction& rhs);
-  
+  void SetEmpty();
 };
 

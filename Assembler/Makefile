@@ -12,7 +12,7 @@ all: $(BIN)/$(EXECUTABLE)
 
 run: clean all
 	clear
-	./$(BIN)/$(EXECUTABLE) ../Processor/Codigos/Instrucciones.txt ../Processor/Codigos/test ../Processor/Codigos/progfile1.dat
+	./$(BIN)/$(EXECUTABLE) ../Processor/Codigos/Instrucciones.txt ../Processor/Codigos/f_instr.txt ../Processor/progfile.dat
 
 $(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) $^ -o $@ 

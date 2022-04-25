@@ -86,3 +86,11 @@ Instruction& Instruction::operator=(const Instruction& rhs) {
   isJump_ = rhs.isJump_;
   return *this;
 }
+
+void Instruction::SetEmpty() {
+  Register temp(16,0);
+  inst_.clear();
+  inst_.push_back(temp);
+  name_ = "";
+  
+}

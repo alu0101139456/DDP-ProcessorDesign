@@ -1,11 +1,11 @@
-:inicio
+:inicio 
 JAL pepe
 LI 4, R1
-JUMP fin
-:pepe
+JUMP inicio
+:pepe 
 LI 10, R2
 RET
-:fin
+
 
 
 
@@ -18,4 +18,3 @@ RET
 
 LI 7, R9
 FNSH
-RET

@@ -22,3 +22,8 @@ Register& Register::operator=(const Register& rhs) {
   sz_ = rhs.sz_;
   return *this;
 }
+
+void Register::SetEmpty() {
+  data_ = 0;
+  sz_ = 0;
+}

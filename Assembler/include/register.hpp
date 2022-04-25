@@ -19,6 +19,8 @@ public:
 
   int GetData(void);
 
+  void SetEmpty();
+
   Register& operator=(const Register& rhs);
 };
 
