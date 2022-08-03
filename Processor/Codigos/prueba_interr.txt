@@ -1,0 +1,22 @@
+:inicio 
+JAL pepe
+LI 4, R1
+JUMP inicio
+:pepe 
+LI 10, R2
+RET
+
+
+
+
+
+
+
+
+
+
+
+
+
+LI 7, R9
+FNSH

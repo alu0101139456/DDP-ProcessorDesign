@@ -1,22 +1,8 @@
 :inicio 
-JAL pepe
-LI 4, R1
-JUMP inicio
-:pepe 
 LI 10, R2
-RET
-
-
-
-
-
-
-
-
-
-
-
-
-
-LI 7, R9
-FNSH
+LI 5, R1
+PUSH R2
+PUSH R1
+POP R3
+POP R4
+ADD R3, R4, R10
