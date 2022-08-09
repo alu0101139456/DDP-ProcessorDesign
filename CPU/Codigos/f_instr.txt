@@ -1,4 +1,3 @@
-:inicio 
 LI 10, R2
 LI 5, R1
 PUSH R2
