@@ -1,4 +1,4 @@
-module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_4mux1, s_4mux2, s_4mux3, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, 
+module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_mux1, s_mux2, s_mux3, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, 
     output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port);
 
 parameter ARITH   = 13'b1000011000000; 
@@ -22,7 +22,22 @@ reg [12:0] signals; // ver si hace falta inicializarlo
 reg onInterrupt = 0;
 reg onFinish = 0;
 
-assign {s_4mux1, s_4mux2, s_4mux3, sel_inputs[1], sel_inputs[0], we3, wez, we_port, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr} = signals;
+assign {
+    s_mux1,         //1
+    s_mux2,         //2
+    s_mux3,         //3
+    sel_inputs[1],  //4
+    sel_inputs[0],  //5
+    we3,            //6
+    wez,            //7
+    we_port,        //8
+    we_istack,      //9
+    s_jret,         //10
+    we_dstack,      //11
+    s_ppop,         //12
+    s_finish_interr //13
+
+} = signals;
 
 always @(opcode, s_interruption) begin
     if (onFinish & !s_finish_interr) begin

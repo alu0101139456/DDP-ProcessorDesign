@@ -16,7 +16,7 @@ begin
 end
 
 
-// instanciación del procesador
+// instanciación de la cpu
 cpu micpu(clk, reset, p0, p1, p2, p3, , , ,);
 
 // input wire clk, reset, input wire [7:0] in_p0, in_p1, output wire [7:0] out_p0, out_p1);
@@ -35,6 +35,8 @@ begin
   
   p0 = 8'b00001000;
   p1 = 8'b00000100;
+  p2 = 8'b00000001;
+  P3 = 8'b00000101;
   
   #(32*120);  //Esperamos 9 ciclos o 9 instrucciones
   $finish;
