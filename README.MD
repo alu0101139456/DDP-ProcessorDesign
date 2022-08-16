@@ -1,7 +1,7 @@
 ## CPU Monociclo
 ---
 ###  Diseño de CPU
-####  1.- Unidad de Control:
+####  **1.- Unidad de Control**
 
 La unidad de control es la encargada de enviar señales a distintos módulos para el correcto funcionamiento de la CPU. Este control será definido en base al OPCODE que obtenga de las intrucciones recibidas y la unidad de control enviará las señales a distintos modulos, memorias, multiplexores, etc. Para la gestión de todas las señales se optó por una configuración utilizando registros. 
   
@@ -132,7 +132,7 @@ end
 
 Como se puede observar en el código, se añadieron las señales de INTERR y FNSH para tratar las interrupciones. INTERR se mantiene activa mientras exista una interrupción o subrutina esta en curso y FNSH para indicar que ha finalizado.
 
-####  2.- Pila 
+####  **2.- Pila** 
 En esta CPU se implementaron dos pilas. Pila de instrucciones y pila de datos. 
  ![Pila](/recursos/StackModule.png)
 
@@ -168,24 +168,51 @@ stack_module #(8,64) STACK_DATA(clk, reset, s_we_stack_data, s_pushpop, RD2, sta
 ~~~
 
 
-####  3.- Puertos de entrada y salida
+####  **3.- Puertos de entrada y salida**
 
-Se creó un módulo que contiene ambos puerto. Esta decisión fue tomada para darle más modularidad al código. 
+Se creó un módulo que contiene el módulo de entrada y el módulo de salida. Esta decisión fue tomada para darle más modularidad al código. 
 
  ![PortsModule](/recursos/PortsModule.png)
 
-### [Enlace a diseño en DRAW.IO](https://drive.google.com/file/d/1nBWm-PRCHsdRkl4STRu-STPYZ3bZ16Lt/view?usp=sharing)
+ ~~~verilog
+module io_module ( input wire clk, reset, we, input wire [1:0] sel_port, 
+    input wire [7:0] in_p0, in_p1, in_p2, in_p3, in_RD2, 
+    output wire [7:0] out_p0, out_p1, out_p2, out_p3, data_in_from_port );
+   
+    input_module IN_MODULE(clk, reset, sel_port, in_p0, in_p1, in_p2, in_p3, data_in_from_port);
+
+    output_module OUT_MODULE(clk, reset, we, sel_port, in_RD2, out_p0, out_p1, out_p2, out_p3);
+    
+endmodule
+~~~
+
+Tanto en el módulo de entrada como en el de salida, se cuenta con 4 registros. Las señales **sel_port** nos permiten seleccionar el registro donde pretendemos dejar el dato o recogerlo.
 
 
-## Estructura de juego de instrucciones para el compilador
+####  **4.- Gestión de entradas**
 
-La estructura de las instrucciones fue creada de la siguiente forma: 
+Para controlar los datos que se guardan en los registros se utiliza un MUX de 4 a 1. Este mux utilizará el bus **sel_input** para la selección de la entrada. 
+
+ ![MUX4_1](/recursos/Mux4.png)
+
+
+
+---
+#### **A continuación se facilita el enlace al diseño de la CPU en Draw.io . Importante usar las pestañas y las distintas capas que ofrece la aplicación.** 
+### [Enlace a diseño](https://drive.google.com/file/d/1nBWm-PRCHsdRkl4STRu-STPYZ3bZ16Lt/view?usp=sharing)
+---
+
+####  **5.- Estructura de juego de instrucciones para el compilador**
+
+Para evitar tener que compilar el compilador cada vez que se realizaban cambios o cada vez que se añadían instrucciones se optó por crear un fichero de texto donde la estructura de las instrucciones fue creada de la siguiente forma: 
 ~~~
 4 4 4 4  MOV     0000
-6 10 0 0 BEZ     100100
+4 8 0 4  LI      1000  
+6 2 8 0  INPUT   100111
 ~~~
+El fichero tiene unas normas a seguir:
 - Los primeros dígitos especifican el tamaño de los registros, en el ejemplo hay 4 registros de 4 bits 
-  - Deben ser 4 registros siempre aunque se tengan que poner a 0 para completar los 16 bits
+- Deben ser 4 registros siempre aunque se tengan que poner a 0 para completar los 16 bits
 - El siguiente parametro declara el nombre de la instrucción.
   - Deben ser nombres en MAYÚSCULAS
 - El último parámetro especifica el OPCODE
@@ -216,6 +243,22 @@ La estructura de las instrucciones fue creada de la siguiente forma:
 | 6  | 2  |4  |4   | POP    |  101100 |
 
  
- <center>
+
 
  ![Instrucciones](/recursos/inst.png)
+
+</center>
+
+---
+
+# Compilador
+
+ El compilador esta desarrollado en C++, por lo que tendremos una programación orientada a objetos. Se añade una opción "debugger" con la creación de una variable booleana que en caso de ser "true" imprime los resultados por la terminal. 
+ 
+ Permite introducir la estructura de las instrucciones por un fichero de texto lo que nos facilita poder cambiar las instrucciones en caso de necesitarlo, el fichero que contrendrá las instrucciones a transformar en binario y el fichero de salida con el resultado. 
+ 
+ ~~~shell
+ ./assembler [fichero_instrucciones] [fichero_programa] [fichero_salida_binario]
+ ~~~
+
+ 

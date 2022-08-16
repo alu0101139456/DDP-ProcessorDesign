@@ -18,7 +18,6 @@ class Parser
  private:
    std::vector<Instruction> instructions_;
    std::vector<Instruction> makedInst_;
-  //  std::vector<std::pair<std::string, int>> jumps_;
   std::vector<std::pair<std::string, int>> jumps_;
   std::vector<std::string> saltos_ = {"JUMP", "BEZ", "BNZ", "JAL"} ;
   bool jump = false;
