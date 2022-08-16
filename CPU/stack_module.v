@@ -5,7 +5,6 @@ module stack_module #(parameter WIDTH = 10, parameter NWORDS = 16)
     (input wire  clk, reset, we_stack, s_pushpop, input wire [WIDTH-1:0] data_in, 
     output wire [WIDTH-1:0] data_out );
 
-// registro #(WIDTH) sincro_reg(clk, reset, data_temp, data_out );
 wire [WIDTH-1:0] data_temp;
 reg [$clog2(NWORDS)-1:0] uno, muno;
 initial 

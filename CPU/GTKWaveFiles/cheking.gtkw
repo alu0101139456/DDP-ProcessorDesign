@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Thu Aug 11 14:44:31 2022
+[*] Fri Aug 12 09:48:07 2022
 [*]
 [dumpfile] "/home/angel/Workspace/4º Año/DDP/P1/DDP-ProcessorDesign/CPU/cpu_tb.vcd"
-[dumpfile_mtime] "Thu Aug 11 11:52:10 2022"
-[dumpfile_size] 25366
+[dumpfile_mtime] "Fri Aug 12 09:45:27 2022"
+[dumpfile_size] 25188
 [savefile] "/home/angel/Workspace/4º Año/DDP/P1/DDP-ProcessorDesign/CPU/GTKWaveFiles/cheking.gtkw"
 [timestart] 0
 [size] 1920 1001
-[pos] 2870 0
-*-17.000000 200500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 3827 0
+*-17.000000 60000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.micpu.
 [treeopen] cpu_tb.micpu.CAMINO_DATOS.
@@ -20,9 +20,9 @@
 @28
 [color] 1
 cpu_tb.clk
-@c00200
+@800200
 -UC
-@22
+@29
 cpu_tb.micpu.unidadControl.opcode[5:0]
 @28
 cpu_tb.micpu.unidadControl.s_jret
@@ -41,7 +41,7 @@ cpu_tb.micpu.unidadControl.we_istack
 cpu_tb.micpu.unidadControl.we_port
 cpu_tb.micpu.unidadControl.wez
 cpu_tb.micpu.unidadControl.z
-@1401200
+@1000200
 -UC
 @800200
 -DataStack
@@ -56,7 +56,7 @@ cpu_tb.micpu.CAMINO_DATOS.STACK_DATA.data_in[7:0]
 cpu_tb.micpu.CAMINO_DATOS.STACK_DATA.data_out[7:0]
 @1000200
 -DataStack
-@c00201
+@c00200
 -Interrupciones
 @24
 cpu_tb.micpu.TIMER.pulse
@@ -68,7 +68,7 @@ cpu_tb.micpu.CAMINO_DATOS.INTER.dirAux[9:0]
 cpu_tb.micpu.CAMINO_DATOS.INTER.i_timer
 cpu_tb.micpu.CAMINO_DATOS.INTER.s_interruption
 cpu_tb.micpu.CAMINO_DATOS.INTER.s_finished
-@1401201
+@1401200
 -Interrupciones
 @800200
 -Input-Ports

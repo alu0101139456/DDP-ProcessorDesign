@@ -9,10 +9,7 @@ module memstack #(parameter WIDTH = 16, parameter NWORDS = 1024)(input  wire clk
     // $display("A is: %d", a);
     #1;
     if (we) begin
-      // $display("Writing %d", data_in);
-      // $display("sp: %d", a);
       mem[a] <= data_in;
-      
     end	
  end
   

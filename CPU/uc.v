@@ -1,6 +1,13 @@
 module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_mux1, s_mux2, s_mux3, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, 
     output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port);
 
+
+reg [3:0] operation;
+reg onInterrupt = 0;
+reg onFinish = 0;
+
+reg [12:0] signals; 
+
 parameter ARITH   = 13'b1000011000000; 
 parameter LOADINM = 13'b1001110000000; 
 parameter JUMP    = 13'b0100000000000; 
@@ -14,13 +21,6 @@ parameter PUSH    = 13'b1000000000100;
 parameter POP     = 13'b1001010000110;
 parameter INTERR  = 13'b0000000010000;
 parameter FNSH    = 13'b1010000011001;
-
-reg [3:0] operation;
-
-reg [12:0] signals; // ver si hace falta inicializarlo
-
-reg onInterrupt = 0;
-reg onFinish = 0;
 
 assign {
     s_mux1,         //1

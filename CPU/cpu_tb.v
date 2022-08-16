@@ -4,7 +4,7 @@ module cpu_tb;
 
 
 reg clk, reset;
-reg [7:0] p0,p1,p2, p3;
+reg [7:0] p0,p1,p2,p3;
 
 // generación de reloj clk
 always //siempre activo, no hay condición de activación
@@ -35,8 +35,8 @@ begin
   
   p0 = 8'b00001000;
   p1 = 8'b00000100;
-  p2 = 8'b00000001;
-  P3 = 8'b00000101;
+  p2 = 8'b00001101;
+  p3 = 8'b00000101;
   
   #(32*120);  //Esperamos 9 ciclos o 9 instrucciones
   $finish;
