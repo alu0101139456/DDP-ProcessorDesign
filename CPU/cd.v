@@ -1,5 +1,7 @@
+`timescale 1 ns / 10 ps
+
 module cd(input wire clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, s_we_port, s_we_stack, s_jalret, s_we_stack_data,  s_pushpop, i_timer, s_finish_interr, input wire [2:0] op_alu, input wire [1:0] sel_inputs, 
-    input wire [7:0] in_p0, in_p1, in_p2, in_p3, output wire z, s_interruption, output wire [5:0] opcode, output wire [7:0] out_p0, out_p1, out_p2, out_p3);
+    input wire [7:0] in_p0, in_p1, in_p2, in_p3, output wire z, s_interruption, output wire [1:0] hilo_in, hilo_out, output wire [5:0] opcode, output wire [7:0] out_p0, out_p1, out_p2, out_p3);
 //Camino de datos de instrucciones de un solo ciclo
 //Nomenclatura 
 
@@ -7,7 +9,7 @@ module cd(input wire clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, s_we_port,
     wire [15:0] instruccion;
     wire [3:0] RA1, RA2, WA3; //10'b1
     wire [7:0] RD1, RD2, WD3, alu_to_mux4, ports_to_mux4, stack_to_mux4, inm_to_mux4;
-    wire ZALU;
+    wire ZALU, i_except, i_port, i_syscall;
     wire [1:0] io_port;
 
     assign dir_salto = instruccion[9:0];
@@ -17,6 +19,8 @@ module cd(input wire clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, s_we_port,
     assign RA1[3:0] = instruccion[11:8];
     assign inm_to_mux4 = instruccion[11:4];
     assign io_port = instruccion[9:8];
+    assign hilo_in = instruccion[5:4];  
+    assign hilo_out = instruccion[1:0];
 
     
     registro #(10)     PC_REGISTER(clk, reset, mux1_to_pc, dir );
@@ -28,7 +32,7 @@ module cd(input wire clk, reset, s_4mux1, s_4mux2, s_4mux3, we3, wez, s_we_port,
     mux2 #(10)         MUX_2(dir_from_exception, dir_salto, s_4mux2, mux2_mux1 ); //s_jalret
     mux2 #(10)         MUX_3(dir_in, dir_out, s_4mux3, mux3_mux1 );
     
-    interruption_module INTER(clk, reset,  i_except, i_port, i_syscall, i_timer, s_finish_interr, dir_from_exception, s_interruption );
+    interruption_module INTER(clk, reset,  i_except, i_port, i_syscall, i_timer, s_finish_interr, dir_from_exception, s_interruption);
 
 
     ffd FFD(clk, reset, ZALU, wez, z);

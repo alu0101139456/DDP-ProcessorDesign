@@ -1,3 +1,5 @@
+`timescale 1 ns / 10 ps
+
 //Componentes varios
 
 //Banco de registros de dos salidas y una entrada
@@ -44,6 +46,27 @@ module registro #(parameter WIDTH = 8)
     if (reset) q <= 0;
     else       q <= d;
 
+endmodule
+
+module registroWe #(parameter WIDTH = 8)
+              (input wire             clk, reset, we,
+               input wire [1:0] hilo,
+               input wire [WIDTH-1:(WIDTH-1)/2 + 1] d_hi, // [7:4]
+               input wire [(WIDTH-1)/2:0] d_low, // [3:0]
+               output reg [WIDTH-1:0] q);
+
+  always @(posedge clk, posedge reset)
+    if (reset) q <= 0;
+    else if(we) 
+    begin
+      if (hilo == 2'b01)
+        q[(WIDTH-1)/2:0] <= d_low; // [3:0]
+      else if (hilo == 2'b10)
+        q[WIDTH-1:(WIDTH-1)/2 + 1] <= d_hi; // [7:4]
+      else if (hilo == 2'b11)
+        q[WIDTH-1:(WIDTH-1)/2 + 1] <= d_hi; // [7:4]
+        q[(WIDTH-1)/2:0] <= d_low;  // [3:0]
+    end
 endmodule
 
 module registroPC #(parameter ADD = 8) (input wire clk, reset,input wire [9:0] d,output reg [9:0] q);

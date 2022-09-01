@@ -1,92 +1,37 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Fri Aug 12 09:48:07 2022
+[*] Thu Sep  1 15:59:23 2022
 [*]
 [dumpfile] "/home/angel/Workspace/4º Año/DDP/P1/DDP-ProcessorDesign/CPU/cpu_tb.vcd"
-[dumpfile_mtime] "Fri Aug 12 09:45:27 2022"
-[dumpfile_size] 25188
+[dumpfile_mtime] "Thu Sep  1 15:56:22 2022"
+[dumpfile_size] 891588
 [savefile] "/home/angel/Workspace/4º Año/DDP/P1/DDP-ProcessorDesign/CPU/GTKWaveFiles/cheking.gtkw"
 [timestart] 0
-[size] 1920 1001
-[pos] 3827 0
-*-17.000000 60000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 1920 1007
+[pos] 3827 1080
+*-17.000000 498700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
-[treeopen] cpu_tb.micpu.
-[treeopen] cpu_tb.micpu.CAMINO_DATOS.
+[treeopen] cpu_tb.cpu.
+[treeopen] cpu_tb.cpu.cpu_final.
+[treeopen] cpu_tb.cpu.cpu_final.CAMINO_DATOS.
 [sst_width] 219
 [signals_width] 185
 [sst_expanded] 1
-[sst_vpaned_height] 284
+[sst_vpaned_height] 286
 @28
 [color] 1
 cpu_tb.clk
 @800200
--UC
+-Entrada Salida
+@28
+cpu_tb.buttons[3:0]
+@22
+cpu_tb.led_v[7:0]
+@1000200
+-Entrada Salida
+@24
+cpu_tb.cpu.cpu_final.CAMINO_DATOS.PC_REGISTER.q[9:0]
 @29
-cpu_tb.micpu.unidadControl.opcode[5:0]
-@28
-cpu_tb.micpu.unidadControl.s_jret
-cpu_tb.micpu.unidadControl.s_ppop
-@c00028
-cpu_tb.micpu.unidadControl.sel_inputs[1:0]
-@28
-(0)cpu_tb.micpu.unidadControl.sel_inputs[1:0]
-(1)cpu_tb.micpu.unidadControl.sel_inputs[1:0]
-@1401200
--group_end
-@28
-cpu_tb.micpu.unidadControl.we3
-cpu_tb.micpu.unidadControl.we_dstack
-cpu_tb.micpu.unidadControl.we_istack
-cpu_tb.micpu.unidadControl.we_port
-cpu_tb.micpu.unidadControl.wez
-cpu_tb.micpu.unidadControl.z
-@1000200
--UC
-@800200
--DataStack
-@24
-cpu_tb.micpu.CAMINO_DATOS.RA1[3:0]
-cpu_tb.micpu.CAMINO_DATOS.RA2[3:0]
-cpu_tb.micpu.CAMINO_DATOS.WA3[3:0]
-cpu_tb.micpu.CAMINO_DATOS.RD1[7:0]
-cpu_tb.micpu.CAMINO_DATOS.RD2[7:0]
-cpu_tb.micpu.CAMINO_DATOS.WD3[7:0]
-cpu_tb.micpu.CAMINO_DATOS.STACK_DATA.data_in[7:0]
-cpu_tb.micpu.CAMINO_DATOS.STACK_DATA.data_out[7:0]
-@1000200
--DataStack
-@c00200
--Interrupciones
-@24
-cpu_tb.micpu.TIMER.pulse
-cpu_tb.micpu.CAMINO_DATOS.dir[9:0]
-@28
-cpu_tb.micpu.CAMINO_DATOS.opcode[5:0]
-@24
-cpu_tb.micpu.CAMINO_DATOS.INTER.dirAux[9:0]
-cpu_tb.micpu.CAMINO_DATOS.INTER.i_timer
-cpu_tb.micpu.CAMINO_DATOS.INTER.s_interruption
-cpu_tb.micpu.CAMINO_DATOS.INTER.s_finished
-@1401200
--Interrupciones
-@800200
--Input-Ports
-@22
-cpu_tb.micpu.in_p0[7:0]
-cpu_tb.micpu.in_p1[7:0]
-cpu_tb.micpu.in_p2[7:0]
-cpu_tb.micpu.in_p3[7:0]
-@1000200
--Input-Ports
-@800200
--Output-Ports
-@22
-cpu_tb.micpu.out_p0[7:0]
-cpu_tb.micpu.out_p1[7:0]
-cpu_tb.micpu.out_p2[7:0]
-cpu_tb.micpu.out_p3[7:0]
-@1000200
--Output-Ports
+cpu_tb.cpu.cpu_final.CAMINO_DATOS.opcode[5:0]
 [pattern_trace] 1
 [pattern_trace] 0

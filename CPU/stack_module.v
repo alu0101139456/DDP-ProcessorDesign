@@ -1,5 +1,4 @@
-
-
+`timescale 1 ns / 10 ps
 
 module stack_module #(parameter WIDTH = 10, parameter NWORDS = 16)
     (input wire  clk, reset, we_stack, s_pushpop, input wire [WIDTH-1:0] data_in, 

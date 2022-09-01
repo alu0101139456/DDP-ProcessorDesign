@@ -1,26 +1,28 @@
+`timescale 1 ns / 10 ps
+
 module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_mux1, s_mux2, s_mux3, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, 
-    output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port);
+    output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port, we_o);
 
 
 reg [3:0] operation;
 reg onInterrupt = 0;
 reg onFinish = 0;
 
-reg [12:0] signals; 
+reg [13:0] signals; 
 
-parameter ARITH   = 13'b1000011000000; 
-parameter LOADINM = 13'b1001110000000; 
-parameter JUMP    = 13'b0100000000000; 
-parameter NOJUMP  = 13'b1100000000000; 
-parameter IN      = 13'b1000110000000;
-parameter OUT     = 13'b1000000100000;
-parameter NOP     = 13'b0000000000000;
-parameter JAL     = 13'b0100000010000;
-parameter RET     = 13'b1010000011000;
-parameter PUSH    = 13'b1000000000100;
-parameter POP     = 13'b1001010000110;
-parameter INTERR  = 13'b0000000010000;
-parameter FNSH    = 13'b1010000011001;
+parameter ARITH   = 14'b10000110000000; 
+parameter LOADINM = 14'b10011100000000; 
+parameter JUMP    = 14'b01000000000000; 
+parameter NOJUMP  = 14'b11000000000000; 
+parameter IN      = 14'b10001100000000;
+parameter OUT     = 14'b10000001000001;
+parameter NOP     = 14'b00000000000000;
+parameter JAL     = 14'b01000000100000;
+parameter RET     = 14'b10100000110000;
+parameter PUSH    = 14'b10000000001000;
+parameter POP     = 14'b10010100001100;
+parameter INTERR  = 14'b00000000100000;
+parameter FNSH    = 14'b10100000110010;
 
 assign {
     s_mux1,         //1
@@ -35,7 +37,8 @@ assign {
     s_jret,         //10
     we_dstack,      //11
     s_ppop,         //12
-    s_finish_interr //13
+    s_finish_interr, //13
+    we_o            //14
 
 } = signals;
 
@@ -43,7 +46,7 @@ always @(opcode, s_interruption) begin
     if (onFinish & !s_finish_interr) begin
         onInterrupt = 0;
         onFinish = 0;
-    end;
+    end
     if (s_interruption && !onInterrupt) begin
         signals = INTERR;
         onInterrupt = 1;

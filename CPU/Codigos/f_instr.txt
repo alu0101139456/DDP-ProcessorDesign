@@ -1,11 +1,28 @@
-LI 10 R10
+LI 1 R2 
+LI 2 R4 
+LI 4 R5 
+LI 8 R6 
 :inicio
 INPUT 0 R1
-PUSH R1
-INPUT 2 R2
-PUSH R2
-POP R4
-POP R5
-ADD R4 R5 R10
-PUSH R10
+SUB R1 R2 R3
+BEZ boton1
 JUMP inicio
+
+:boton1
+LI 1 R15
+JUMP inicio
+
+
+
+
+
+
+SUB R15 R2 R14
+BEZ ledv_On
+FINSH
+
+
+:ledv_On
+LI 255 R14 
+OUTPUT 0 R14
+
