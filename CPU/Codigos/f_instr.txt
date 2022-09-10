@@ -1,15 +1,45 @@
-LI 1 R2 
-LI 2 R4 
-LI 4 R5 
-LI 8 R6 
-:inicio
-INPUT 0 R1
-SUB R1 R2 R3
-BEZ boton1
+LI 1 R2  # Registro para comprobar boton0
+LI 2 R4  # Registro para comprobar boton1
+LI 4 R5  # Registro para comprobar boton2
+LI 8 R6  # Registro para comprobar boton3
+LI 0 R11 # Contador para lectura
+
+
+#Comprobamos los valores del P0 y vamos restando sus valores dependiendo de la pocision
+#que tienen en el puerto --> 00000001|00000010|00000100|00001000 guardamos valores en los registros R14 y R15
+inicio:       
+INPUT 0 3 R1  #Se guarda lo que haya entrado por los botones en R1    
+SUB R1 R2 R3  #Se resta 1
+BEZ boton0    #Si es 0 vamos al boton0
+
+SUB R1 R4 R3  #Se resta 2  
+BEZ boton1    #Si es 0 vamos al boton1
+
+SUB R1 R5 R3   #Se resta 4
+BEZ boton2     #Si es 0 vamos al boton2
+
+SUB R1 R6 R3    #Se resta 8
+BEZ boton3      #Si es 0 vamos al boton3
+
 JUMP inicio
 
-:boton1
-LI 1 R15
+boton0:      #Modo lectura
+LI 1 R15     #Cargamos un 1 en el R15 (será como un flag)
+LI 0 R14     # R14 lo usamos para saber si toca guardar, debe actualizar el valor
+JUMP inicio
+
+boton1:  # Guardar
+LI 1 R14    #Cargamos un 1 en el R14 
+JUMP inicio
+
+boton2:  # Apagar
+LI 2 R15    #Cargamos un 2 en el R15 (será como un flag)
+LI 0 R14    # R14 lo usamos para saber si toca guardar, debe actualizar el valor
+JUMP inicio
+
+boton3:  # mostrar
+LI 8 R15    #Cargamos un 8 en el R15 (será como un flag)
+LI 0 R14    # R14 lo usamos para saber si toca guardar, debe actualizar el valor
 JUMP inicio
 
 
@@ -17,12 +47,538 @@ JUMP inicio
 
 
 
-SUB R15 R2 R14
-BEZ ledv_On
-FINSH
 
 
-:ledv_On
-LI 255 R14 
-OUTPUT 0 R14
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# R12 - Registro que enciende leds verdes
+
+#Comprobación de botones
+SUB R15 R2 R3       # Si al restar 1 da 0 significa que el boton de lectura de los switches fue activado
+BEZ lectura         # Vamos a "lectura" si la resta dio 0
+SUB R15 R4 R3       # Restamos 2 a R15
+BEZ apagar_todo     # Si 0 entonces vamos a apagar_todo
+SUB R15 R6 R3       # Restamos un 8 a R15
+BEZ mostrar         # Si 0 entonces mostramos
+FNSH
+
+lectura:
+SUB R14 R2 R3         # Restamos 1 a R14
+BNZ ctrl_switches     # Si no es 0 vamos a ctrl_switches
+
+ADD R11 R2 R11      # Incrementamos contador 
+INPUT 1 1 R3        # Leemos el puerto 1 para la parte baja y metemos en R3
+PUSH R3             # Guardamos en pila R3
+INPUT 2 2 R3        # Leemos el puerto 2 para la parte alta y metemos en R3
+PUSH R3             # Guardamos R3
+LI 0 R14            # Actualizamos el estado de R14
+                    # Para confirmar la lectura encenderemos las luces
+OUTPUTR 0 3 R13     # Cargamos en R13 el estado de los leds verdes
+LI 63 R12           # Cargamos en R12 un valor que tenga muchos unos
+JUMP ledsv_on       # Encendemos leds verdes
+FNSH
+
+
+ctrl_switches:
+INPUT 1 1 R3     # Leemos el puerto 1 para la parte baja y metemos en R3
+PUSH R3          # Guardamos en pila R3
+INPUT 2 2 R3     # Leemos el puerto 2 para la parte alta y metemos en R3
+PUSH R3          # Guardamos R3
+POP R3           # Sacamos el contenido de la pila en R3
+OUTPUT 2 R3 2    # Ponemos la parte alta en el puerto2
+POP R3           # Sacamos el contenido de la pila en R3
+OUTPUT 1 R3 1    # Ponemos la parte baja en el puerto1
+
+                 # Hacemos que parpadee estando en modo lectura
+OUTPUTR 0 3 R13  # Guardamos estado de puerto salida P0 en R3
+LI 1 R12         # Carga de inmediato
+SUB R12 R13 R3   # Restamos valor leido a R12
+BEZ ledsv_off    # Si es cero apagamos luces
+JUMP ledsv_on    # Encendemos luces
+FNSH
+
+ledsv_off:
+OUTPUT 0 R0 3   # Metemos en puerto0 el valor de R0 = 0
+FNSH
+
+ledsv_on:
+OUTPUT 0 R12 3  # Metemos en puerto0 el valor de R12
+FNSH
+
+mostrar:        
+POP R3              # Sacamos el contenido de la pila en R3 
+OUTPUT 2 R3 2       # Metemos para la parte alta en el puerto 2
+POP R3              # Sacamos el contenido de la pila en R3
+OUTPUT 1 R3 1       # Metemos para la parte baja en el puerto 2
+SUB R11 R2 R11      # Decrementamos el contador 
+BEZ termino_mostrar # Si el contador es cero ya no hay valores en la pila
+FNSH
+
+termino_mostrar:    # Encendemos todos los leds cuando ya no hayan valores en la pila
+OUTPUTR 0 3 R13     # Cargamos el estado del P0 en R3
+LI 255 R12          # Cargamos en R12 un 255 para encender todos los leds
+SUB R12 R13 R3      # Restamos el valor de P0 a R3 para saber el estado en el que esta
+BEZ ledsv_off       # Si es cero significa que estaban encendidos y hay que apagarlos
+JUMP ledsv_on       # Si no es cero habrá que encenderlos
+FNSH
+
+apagar_todo:    # Cargamos en todos los puertos un cero
+OUTPUT 0 R0 3   
+OUTPUT 1 R0 1
+OUTPUT 2 R0 2
+FNSH

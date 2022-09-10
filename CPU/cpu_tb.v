@@ -36,7 +36,7 @@ begin
 
 initial
 begin
-  $dumpfile("cpu_tb.vcd");
+  $dumpfile("bin/cpu_tb.vcd");
   $dumpvars;
   //for (idx = 0; idx < 16; idx = idx + 1) $dumpvars(0,cpu_tb.cpumono.data_path.register_file.regb[idx]); 
   
@@ -49,10 +49,14 @@ begin
   reset = 0;  //bajamos el reset 
 
   #30;
-  buttons = 4'b1110; // presionamos key0
+  //buttons = 4'b1110; // presionamos key0
+  switches = 10'b0001000001;
 
-  #600
+  #1000
+  buttons = 4'b1110;
+  #20000
   buttons = 4'b1111; // suponemos que ha pasado tiempo suficiente como para que el main haya revisado el estado
+  switches = 10'b0;
 
 
 end
@@ -65,8 +69,8 @@ begin
 
   for (idx = 0; idx < 16; idx = idx + 1)
   begin
-    registers[15:0] = cpu_tb.cpu.cpu_final.CAMINO_DATOS.REGFILE.regb[idx];
-    $write("R%d = %d\n",idx, registers);
+    registers[7:0] = cpu_tb.cpu.cpu_final.CAMINO_DATOS.REGFILE.regb[idx];
+    $write("R%d =%d\n",idx, registers);
   end
   $finish;
 end

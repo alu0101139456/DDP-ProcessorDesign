@@ -1,28 +1,27 @@
 `timescale 1 ns / 10 ps
 
-module uc(input wire [5:0] opcode, input wire z, s_interruption, output wire s_mux1, s_mux2, s_mux3, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, 
-    output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port, we_o);
+module uc(input wire [5:0] opcode, input wire z, i_timer, s_interruption, output wire s_mux1, s_mux2, s_mux3, we3, wez, we_istack, s_jret, we_dstack, s_ppop, s_finish_interr, 
+    output reg [2:0] op_alu, output wire [1:0] sel_inputs, output wire we_port, we_o, s_special_port);
 
 
 reg [3:0] operation;
-reg onInterrupt = 0;
-reg onFinish = 0;
 
-reg [13:0] signals; 
+reg [14:0] signals; 
 
-parameter ARITH   = 14'b10000110000000; 
-parameter LOADINM = 14'b10011100000000; 
-parameter JUMP    = 14'b01000000000000; 
-parameter NOJUMP  = 14'b11000000000000; 
-parameter IN      = 14'b10001100000000;
-parameter OUT     = 14'b10000001000001;
-parameter NOP     = 14'b00000000000000;
-parameter JAL     = 14'b01000000100000;
-parameter RET     = 14'b10100000110000;
-parameter PUSH    = 14'b10000000001000;
-parameter POP     = 14'b10010100001100;
-parameter INTERR  = 14'b00000000100000;
-parameter FNSH    = 14'b10100000110010;
+parameter ARITH   = 15'b100001100000000; 
+parameter LOADINM = 15'b100111000000000; 
+parameter JUMP    = 15'b010000000000000; 
+parameter NOJUMP  = 15'b110000000000000; 
+parameter IN      = 15'b100011000000000;
+parameter OUT     = 15'b100000010000010;
+parameter NOP     = 15'b000000000000000;
+parameter JAL     = 15'b010000001000000;
+parameter RET     = 15'b101000001100000;
+parameter PUSH    = 15'b100000000010000;
+parameter POP     = 15'b100101000011000;
+parameter INTERR  = 15'b000000001000000;
+parameter FNSH    = 15'b101000001100100;
+parameter OUTPUTR = 15'b100011000000001;
 
 assign {
     s_mux1,         //1
@@ -38,19 +37,16 @@ assign {
     we_dstack,      //11
     s_ppop,         //12
     s_finish_interr, //13
-    we_o            //14
+    we_o,            //14
+    s_special_port   //15
 
 } = signals;
 
-always @(opcode, s_interruption) begin
-    if (onFinish & !s_finish_interr) begin
-        onInterrupt = 0;
-        onFinish = 0;
-    end
-    if (s_interruption && !onInterrupt) begin
+always @(*) begin
+    if (i_timer & ~s_interruption) begin
         signals = INTERR;
-        onInterrupt = 1;
-    end
+		  op_alu = 3'bx;
+	 end
     else begin
         op_alu = opcode[4:2];
         casez (opcode)
@@ -77,7 +73,6 @@ always @(opcode, s_interruption) begin
 
             6'b100110: // salto incondicional
                 signals = JUMP;
-
             6'b100111:
                 signals = IN;
             6'b101000:
@@ -91,14 +86,12 @@ always @(opcode, s_interruption) begin
             6'b101100:
                 signals = POP;
             6'b101110:
-                begin
-                    signals = FNSH;
-                    onFinish = 1;
-                end
+                signals = FNSH;
+            6'b101111:
+                signals = OUTPUTR;
             default: 
                 signals = NOP; 
         endcase
-
     end 
 end
 

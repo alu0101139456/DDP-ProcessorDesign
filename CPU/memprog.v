@@ -10,7 +10,7 @@ module memprog #(parameter WIDTH = 16, parameter NWORDS = 1024)(input  wire     
 
   initial
   begin
-    $readmemb("progfile.dat",mem); // inicializa la memoria del fichero en texto binario
+    $readmemb("progfile.mem",mem); // inicializa la memoria del fichero en texto binario
   end
   
   assign rd = mem[a];

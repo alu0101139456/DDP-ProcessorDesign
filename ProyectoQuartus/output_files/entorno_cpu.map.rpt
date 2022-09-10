@@ -1,0 +1,855 @@
+Analysis & Synthesis report for entorno_cpu
+Sat Sep 10 11:47:57 2022
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Inverted Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for User Entity Instance: cpu:cpu_final|uc:unidadControl
+ 13. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|registro:PC_REGISTER
+ 14. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|sum:SUMADOR
+ 15. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST
+ 16. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST|memstack:MEM_STACK
+ 17. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|memprog:MEMPROG
+ 18. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_1
+ 19. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_2
+ 20. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_3
+ 21. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|interruption_module:INTER
+ 22. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT
+ 23. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT|mux2:m1
+ 24. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT|mux2:m2
+ 25. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT|mux2:m3
+ 26. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|output_module:OUT_MODULE|deco:DECO_FOR_OUTPUTS
+ 27. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_EXTRA_MODULE|mux4:MUX_PORT
+ 28. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_EXTRA_MODULE|mux4:MUX_PORT|mux2:m1
+ 29. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_EXTRA_MODULE|mux4:MUX_PORT|mux2:m2
+ 30. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_EXTRA_MODULE|mux4:MUX_PORT|mux2:m3
+ 31. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_4
+ 32. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS
+ 33. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m1
+ 34. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m2
+ 35. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m3
+ 36. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA
+ 37. Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA|memstack:MEM_STACK
+ 38. Parameter Settings for User Entity Instance: timer:TIMER
+ 39. Parameter Settings for User Entity Instance: control_io:control_es|deco:outputs
+ 40. Parameter Settings for User Entity Instance: control_io:control_es|registroWe:leds_rlo
+ 41. Parameter Settings for User Entity Instance: control_io:control_es|registroWe:leds_rhi
+ 42. Parameter Settings for User Entity Instance: control_io:control_es|registroWe:leds_v
+ 43. Port Connectivity Checks: "control_io:control_es|deco:outputs"
+ 44. Port Connectivity Checks: "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA"
+ 45. Port Connectivity Checks: "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST"
+ 46. Port Connectivity Checks: "cpu:cpu_final|cd:CAMINO_DATOS|sum:SUMADOR"
+ 47. Elapsed Time Per Partition
+ 48. Analysis & Synthesis Messages
+ 49. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Sep 10 11:47:57 2022           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; entorno_cpu                                     ;
+; Top-level Entity Name              ; entorno_cpu                                     ;
+; Family                             ; Cyclone II                                      ;
+; Total logic elements               ; 1,888                                           ;
+;     Total combinational functions  ; 1,106                                           ;
+;     Dedicated logic registers      ; 867                                             ;
+; Total registers                    ; 867                                             ;
+; Total pins                         ; 34                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C20F484C7       ;                    ;
+; Top-level entity name                                                      ; entorno_cpu        ; entorno_cpu        ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 8      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                           ;
++---------------------------------------+-----------------+------------------------------+-----------------------------------------------+---------+
+; File Name with User-Entered Path      ; Used in Netlist ; File Type                    ; File Name with Absolute Path                  ; Library ;
++---------------------------------------+-----------------+------------------------------+-----------------------------------------------+---------+
+; ../CPU/uc.v                           ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/uc.v               ;         ;
+; ../CPU/timer.v                        ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/timer.v            ;         ;
+; ../CPU/stack_module.v                 ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/stack_module.v     ;         ;
+; ../CPU/output.v                       ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/output.v           ;         ;
+; ../CPU/memstack.v                     ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/memstack.v         ;         ;
+; ../CPU/memprog.v                      ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/memprog.v          ;         ;
+; ../CPU/io_module.v                    ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/io_module.v        ;         ;
+; ../CPU/interrupt_module.v             ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/interrupt_module.v ;         ;
+; ../CPU/input.v                        ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/input.v            ;         ;
+; ../CPU/entorno_cpu.v                  ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/entorno_cpu.v      ;         ;
+; ../CPU/cpu.v                          ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/cpu.v              ;         ;
+; ../CPU/control_io.v                   ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/control_io.v       ;         ;
+; ../CPU/componentes.v                  ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/componentes.v      ;         ;
+; ../CPU/cd.v                           ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/cd.v               ;         ;
+; ../CPU/alu.v                          ; yes             ; User Verilog HDL File        ; C:/DDP-ProcessorDesign/CPU/alu.v              ;         ;
+; /ddp-processordesign/cpu/progfile.mem ; yes             ; Auto-Found Unspecified File  ; /ddp-processordesign/cpu/progfile.mem         ;         ;
+; /ddp-processordesign/cpu/regfile.dat  ; yes             ; Auto-Found Unspecified File  ; /ddp-processordesign/cpu/regfile.dat          ;         ;
++---------------------------------------+-----------------+------------------------------+-----------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 1,888 ;
+;                                             ;       ;
+; Total combinational functions               ; 1106  ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 959   ;
+;     -- 3 input functions                    ; 43    ;
+;     -- <=2 input functions                  ; 104   ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 1046  ;
+;     -- arithmetic mode                      ; 60    ;
+;                                             ;       ;
+; Total registers                             ; 867   ;
+;     -- Dedicated logic registers            ; 867   ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 34    ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 867   ;
+; Total fan-out                               ; 7533  ;
+; Average fan-out                             ; 3.75  ;
++---------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                            ;
++----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node             ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                        ; Library Name ;
++----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+; |entorno_cpu                           ; 1106 (1)          ; 867 (0)      ; 0           ; 0            ; 0       ; 0         ; 34   ; 0            ; |entorno_cpu                                                                               ; work         ;
+;    |control_io:control_es|             ; 2 (2)             ; 18 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|control_io:control_es                                                         ; work         ;
+;       |registroWe:leds_rhi|            ; 0 (0)             ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|control_io:control_es|registroWe:leds_rhi                                     ; work         ;
+;       |registroWe:leds_rlo|            ; 0 (0)             ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|control_io:control_es|registroWe:leds_rlo                                     ; work         ;
+;       |registroWe:leds_v|              ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|control_io:control_es|registroWe:leds_v                                       ; work         ;
+;    |cpu:cpu_final|                     ; 1069 (0)          ; 823 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final                                                                 ; work         ;
+;       |cd:CAMINO_DATOS|                ; 1047 (1)          ; 823 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS                                                 ; work         ;
+;          |alu:ALU|                     ; 27 (27)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|alu:ALU                                         ; work         ;
+;          |ffd:FFZi|                    ; 2 (2)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|ffd:FFZi                                        ; work         ;
+;          |ffd:FFZ|                     ; 2 (2)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|ffd:FFZ                                         ; work         ;
+;          |interruption_module:INTER|   ; 1 (0)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|interruption_module:INTER                       ; work         ;
+;             |ffd:ffinterruption|       ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|interruption_module:INTER|ffd:ffinterruption    ; work         ;
+;          |io_module:PORTS_MODULE|      ; 13 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE                          ; work         ;
+;             |output_module:OUT_MODULE| ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|output_module:OUT_MODULE ; work         ;
+;          |memprog:MEMPROG|             ; 139 (139)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|memprog:MEMPROG                                 ; work         ;
+;          |mux2:MUX_1|                  ; 20 (20)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_1                                      ; work         ;
+;          |mux2:MUX_4|                  ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_4                                      ; work         ;
+;          |mux4:MUX_OF_INPUTS|          ; 33 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS                              ; work         ;
+;             |mux2:m3|                  ; 33 (33)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m3                      ; work         ;
+;          |regfile:REGFILE|             ; 210 (210)         ; 128 (128)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|regfile:REGFILE                                 ; work         ;
+;          |registro:PC_REGISTER|        ; 3 (3)             ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|registro:PC_REGISTER                            ; work         ;
+;          |stack_module:STACK_DATA|     ; 430 (14)          ; 518 (6)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA                         ; work         ;
+;             |memstack:MEM_STACK|       ; 416 (416)         ; 512 (512)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA|memstack:MEM_STACK      ; work         ;
+;          |stack_module:STACK_INST|     ; 154 (22)          ; 164 (4)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST                         ; work         ;
+;             |memstack:MEM_STACK|       ; 132 (132)         ; 160 (160)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST|memstack:MEM_STACK      ; work         ;
+;          |sum:SUMADOR|                 ; 10 (10)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|sum:SUMADOR                                     ; work         ;
+;       |uc:unidadControl|               ; 22 (22)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|cpu:cpu_final|uc:unidadControl                                                ; work         ;
+;    |timer:TIMER|                       ; 34 (34)           ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |entorno_cpu|timer:TIMER                                                                   ; work         ;
++----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                               ;
++-------------------------------------------------------------+--------------------+
+; Register name                                               ; Reason for Removal ;
++-------------------------------------------------------------+--------------------+
+; cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA|sp[6] ; Lost fanout        ;
+; cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST|sp[4] ; Lost fanout        ;
+; Total Number of Removed Registers = 2                       ;                    ;
++-------------------------------------------------------------+--------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 867   ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 25    ;
+; Number of registers using Asynchronous Clear ; 739   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 826   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; timer:TIMER|cont[0]                    ; 2       ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA|sp[3]   ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST|sp[3]   ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|registro:PC_REGISTER|q[1]       ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|alu:ALU|Mux5                    ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m3|y[5] ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 20 LEs               ; 4 LEs                  ; No         ; |entorno_cpu|cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m3|y[1] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|uc:unidadControl ;
++----------------+-----------------+------------------------------------------+
+; Parameter Name ; Value           ; Type                                     ;
++----------------+-----------------+------------------------------------------+
+; ARITH          ; 100001100000000 ; Unsigned Binary                          ;
+; LOADINM        ; 100111000000000 ; Unsigned Binary                          ;
+; JUMP           ; 010000000000000 ; Unsigned Binary                          ;
+; NOJUMP         ; 110000000000000 ; Unsigned Binary                          ;
+; IN             ; 100011000000000 ; Unsigned Binary                          ;
+; OUT            ; 100000010000010 ; Unsigned Binary                          ;
+; NOP            ; 000000000000000 ; Unsigned Binary                          ;
+; JAL            ; 010000001000000 ; Unsigned Binary                          ;
+; RET            ; 101000001100000 ; Unsigned Binary                          ;
+; PUSH           ; 100000000010000 ; Unsigned Binary                          ;
+; POP            ; 100101000011000 ; Unsigned Binary                          ;
+; INTERR         ; 000000001000000 ; Unsigned Binary                          ;
+; FNSH           ; 101000001100100 ; Unsigned Binary                          ;
+; OUTPUTR        ; 100011000000001 ; Unsigned Binary                          ;
++----------------+-----------------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|registro:PC_REGISTER ;
++----------------+-------+------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                   ;
++----------------+-------+------------------------------------------------------------------------+
+; WIDTH          ; 10    ; Signed Integer                                                         ;
++----------------+-------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|sum:SUMADOR ;
++----------------+-------+---------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                          ;
++----------------+-------+---------------------------------------------------------------+
+; WIDTH          ; 10    ; Signed Integer                                                ;
++----------------+-------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST ;
++----------------+-------+---------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                      ;
++----------------+-------+---------------------------------------------------------------------------+
+; WIDTH          ; 10    ; Signed Integer                                                            ;
+; NWORDS         ; 16    ; Signed Integer                                                            ;
++----------------+-------+---------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST|memstack:MEM_STACK ;
++----------------+-------+----------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                         ;
++----------------+-------+----------------------------------------------------------------------------------------------+
+; WIDTH          ; 10    ; Signed Integer                                                                               ;
+; NWORDS         ; 16    ; Signed Integer                                                                               ;
++----------------+-------+----------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|memprog:MEMPROG ;
++----------------+-------+-------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                              ;
++----------------+-------+-------------------------------------------------------------------+
+; WIDTH          ; 16    ; Signed Integer                                                    ;
+; NWORDS         ; 1024  ; Signed Integer                                                    ;
++----------------+-------+-------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_1 ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; WIDTH          ; 10    ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_2 ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; WIDTH          ; 10    ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_3 ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; WIDTH          ; 10    ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|interruption_module:INTER ;
++----------------+------------+------------------------------------------------------------------------+
+; Parameter Name ; Value      ; Type                                                                   ;
++----------------+------------+------------------------------------------------------------------------+
+; dir_timer      ; 1000000000 ; Unsigned Binary                                                        ;
++----------------+------------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                          ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                                                ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT|mux2:m1 ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                  ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                                                        ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT|mux2:m2 ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                  ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                                                        ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT|mux2:m3 ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                  ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                                                        ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|output_module:OUT_MODULE|deco:DECO_FOR_OUTPUTS ;
++----------------+-------+-------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                    ;
++----------------+-------+-------------------------------------------------------------------------------------------------------------------------+
+; NBITS          ; 4     ; Signed Integer                                                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_EXTRA_MODULE|mux4:MUX_PORT ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                                                      ;
++----------------+-------+---------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_EXTRA_MODULE|mux4:MUX_PORT|mux2:m1 ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                        ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                                                              ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_EXTRA_MODULE|mux4:MUX_PORT|mux2:m2 ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                        ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                                                              ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_EXTRA_MODULE|mux4:MUX_PORT|mux2:m3 ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                        ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                                                              ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_4 ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS ;
++----------------+-------+----------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                 ;
++----------------+-------+----------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                       ;
++----------------+-------+----------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m1 ;
++----------------+-------+------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                         ;
++----------------+-------+------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                               ;
++----------------+-------+------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m2 ;
++----------------+-------+------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                         ;
++----------------+-------+------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                               ;
++----------------+-------+------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|mux4:MUX_OF_INPUTS|mux2:m3 ;
++----------------+-------+------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                         ;
++----------------+-------+------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                               ;
++----------------+-------+------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA ;
++----------------+-------+---------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                      ;
++----------------+-------+---------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                            ;
+; NWORDS         ; 64    ; Signed Integer                                                            ;
++----------------+-------+---------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA|memstack:MEM_STACK ;
++----------------+-------+----------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                         ;
++----------------+-------+----------------------------------------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                                                               ;
+; NWORDS         ; 64    ; Signed Integer                                                                               ;
++----------------+-------+----------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: timer:TIMER ;
++----------------+----------+------------------------------+
+; Parameter Name ; Value    ; Type                         ;
++----------------+----------+------------------------------+
+; T              ; 25000000 ; Signed Integer               ;
++----------------+----------+------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: control_io:control_es|deco:outputs ;
++----------------+-------+--------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                   ;
++----------------+-------+--------------------------------------------------------+
+; NBITS          ; 4     ; Signed Integer                                         ;
++----------------+-------+--------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: control_io:control_es|registroWe:leds_rlo ;
++----------------+-------+---------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                          ;
++----------------+-------+---------------------------------------------------------------+
+; WIDTH          ; 5     ; Signed Integer                                                ;
++----------------+-------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: control_io:control_es|registroWe:leds_rhi ;
++----------------+-------+---------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                          ;
++----------------+-------+---------------------------------------------------------------+
+; WIDTH          ; 5     ; Signed Integer                                                ;
++----------------+-------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: control_io:control_es|registroWe:leds_v ;
++----------------+-------+-------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                        ;
++----------------+-------+-------------------------------------------------------------+
+; WIDTH          ; 8     ; Signed Integer                                              ;
++----------------+-------+-------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "control_io:control_es|deco:outputs"                                                   ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; out[3] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------+
+; Port Connectivity Checks: "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA" ;
++------------------+-------+----------+---------------------------------------------+
+; Port             ; Type  ; Severity ; Details                                     ;
++------------------+-------+----------+---------------------------------------------+
+; instruction_mode ; Input ; Info     ; Stuck at GND                                ;
++------------------+-------+----------+---------------------------------------------+
+
+
++-----------------------------------------------------------------------------------+
+; Port Connectivity Checks: "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST" ;
++------------------+-------+----------+---------------------------------------------+
+; Port             ; Type  ; Severity ; Details                                     ;
++------------------+-------+----------+---------------------------------------------+
+; instruction_mode ; Input ; Info     ; Stuck at VCC                                ;
++------------------+-------+----------+---------------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "cpu:cpu_final|cd:CAMINO_DATOS|sum:SUMADOR" ;
++---------+-------+----------+------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                  ;
++---------+-------+----------+------------------------------------------+
+; a[9..1] ; Input ; Info     ; Stuck at GND                             ;
+; a[0]    ; Input ; Info     ; Stuck at VCC                             ;
++---------+-------+----------+------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:02     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Sat Sep 10 11:47:53 2022
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off entorno_cpu -c entorno_cpu
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/uc.v
+    Info (12023): Found entity 1: uc
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/timer.v
+    Info (12023): Found entity 1: timer
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/stack_module.v
+    Info (12023): Found entity 1: stack_module
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/output.v
+    Info (12023): Found entity 1: output_module
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/memstack.v
+    Info (12023): Found entity 1: memstack
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/memprog.v
+    Info (12023): Found entity 1: memprog
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/io_module.v
+    Info (12023): Found entity 1: io_module
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/interrupt_module.v
+    Info (12023): Found entity 1: interruption_module
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/input.v
+    Info (12023): Found entity 1: input_module
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/entorno_cpu.v
+    Info (12023): Found entity 1: entorno_cpu
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/cpu_tb.v
+    Info (12023): Found entity 1: cpu_tb
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/cpu.v
+    Info (12023): Found entity 1: cpu
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/control_io.v
+    Info (12023): Found entity 1: control_io
+Info (12021): Found 8 design units, including 8 entities, in source file /ddp-processordesign/cpu/componentes.v
+    Info (12023): Found entity 1: regfile
+    Info (12023): Found entity 2: sum
+    Info (12023): Found entity 3: registro
+    Info (12023): Found entity 4: registroWe
+    Info (12023): Found entity 5: mux2
+    Info (12023): Found entity 6: mux4
+    Info (12023): Found entity 7: ffd
+    Info (12023): Found entity 8: deco
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/cd.v
+    Info (12023): Found entity 1: cd
+Info (12021): Found 1 design units, including 1 entities, in source file /ddp-processordesign/cpu/alu.v
+    Info (12023): Found entity 1: alu
+Info (12127): Elaborating entity "entorno_cpu" for the top level hierarchy
+Info (12128): Elaborating entity "cpu" for hierarchy "cpu:cpu_final"
+Info (12128): Elaborating entity "uc" for hierarchy "cpu:cpu_final|uc:unidadControl"
+Info (12128): Elaborating entity "cd" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS"
+Info (12128): Elaborating entity "registro" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|registro:PC_REGISTER"
+Info (12128): Elaborating entity "sum" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|sum:SUMADOR"
+Info (12128): Elaborating entity "stack_module" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST"
+Warning (10230): Verilog HDL assignment warning at stack_module.v(11): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at stack_module.v(12): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at stack_module.v(29): truncated value with size 5 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at stack_module.v(30): truncated value with size 32 to match size of target (10)
+Info (12128): Elaborating entity "memstack" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST|memstack:MEM_STACK"
+Info (12128): Elaborating entity "memprog" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|memprog:MEMPROG"
+Warning (10030): Net "mem.data_a" at memprog.v(9) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "mem.waddr_a" at memprog.v(9) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "mem.we_a" at memprog.v(9) has no driver or initial value, using a default initial value '0'
+Info (12128): Elaborating entity "regfile" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|regfile:REGFILE"
+Warning (10230): Verilog HDL assignment warning at componentes.v(26): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at componentes.v(27): truncated value with size 32 to match size of target (8)
+Info (12128): Elaborating entity "mux2" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_1"
+Info (12128): Elaborating entity "interruption_module" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|interruption_module:INTER"
+Info (12128): Elaborating entity "ffd" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|interruption_module:INTER|ffd:ffinterruption"
+Info (12128): Elaborating entity "alu" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|alu:ALU"
+Warning (10230): Verilog HDL assignment warning at alu.v(18): truncated value with size 32 to match size of target (8)
+Info (12128): Elaborating entity "io_module" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE"
+Info (12128): Elaborating entity "input_module" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE"
+Info (12128): Elaborating entity "mux4" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT"
+Info (12128): Elaborating entity "mux2" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|input_module:IN_MODULE|mux4:MUX_PORT|mux2:m1"
+Info (12128): Elaborating entity "output_module" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|output_module:OUT_MODULE"
+Info (12128): Elaborating entity "deco" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|io_module:PORTS_MODULE|output_module:OUT_MODULE|deco:DECO_FOR_OUTPUTS"
+Info (12128): Elaborating entity "mux2" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|mux2:MUX_4"
+Info (12128): Elaborating entity "stack_module" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA"
+Warning (10230): Verilog HDL assignment warning at stack_module.v(11): truncated value with size 32 to match size of target (6)
+Warning (10230): Verilog HDL assignment warning at stack_module.v(12): truncated value with size 32 to match size of target (6)
+Warning (10230): Verilog HDL assignment warning at stack_module.v(29): truncated value with size 7 to match size of target (6)
+Warning (10230): Verilog HDL assignment warning at stack_module.v(30): truncated value with size 32 to match size of target (8)
+Info (12128): Elaborating entity "memstack" for hierarchy "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA|memstack:MEM_STACK"
+Info (12128): Elaborating entity "timer" for hierarchy "timer:TIMER"
+Warning (10230): Verilog HDL assignment warning at timer.v(15): truncated value with size 32 to match size of target (25)
+Warning (10230): Verilog HDL assignment warning at timer.v(19): truncated value with size 32 to match size of target (25)
+Warning (10240): Verilog HDL Always Construct warning at timer.v(9): inferring latch(es) for variable "limit", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "limit[0]" at timer.v(9)
+Info (10041): Inferred latch for "limit[1]" at timer.v(9)
+Info (10041): Inferred latch for "limit[2]" at timer.v(9)
+Info (10041): Inferred latch for "limit[3]" at timer.v(9)
+Info (10041): Inferred latch for "limit[4]" at timer.v(9)
+Info (10041): Inferred latch for "limit[5]" at timer.v(9)
+Info (10041): Inferred latch for "limit[6]" at timer.v(9)
+Info (10041): Inferred latch for "limit[7]" at timer.v(9)
+Info (10041): Inferred latch for "limit[8]" at timer.v(9)
+Info (10041): Inferred latch for "limit[9]" at timer.v(9)
+Info (10041): Inferred latch for "limit[10]" at timer.v(9)
+Info (10041): Inferred latch for "limit[11]" at timer.v(9)
+Info (10041): Inferred latch for "limit[12]" at timer.v(9)
+Info (10041): Inferred latch for "limit[13]" at timer.v(9)
+Info (10041): Inferred latch for "limit[14]" at timer.v(9)
+Info (10041): Inferred latch for "limit[15]" at timer.v(9)
+Info (10041): Inferred latch for "limit[16]" at timer.v(9)
+Info (10041): Inferred latch for "limit[17]" at timer.v(9)
+Info (10041): Inferred latch for "limit[18]" at timer.v(9)
+Info (10041): Inferred latch for "limit[19]" at timer.v(9)
+Info (10041): Inferred latch for "limit[20]" at timer.v(9)
+Info (10041): Inferred latch for "limit[21]" at timer.v(9)
+Info (10041): Inferred latch for "limit[22]" at timer.v(9)
+Info (10041): Inferred latch for "limit[23]" at timer.v(9)
+Info (10041): Inferred latch for "limit[24]" at timer.v(9)
+Info (12128): Elaborating entity "control_io" for hierarchy "control_io:control_es"
+Info (12128): Elaborating entity "registroWe" for hierarchy "control_io:control_es|registroWe:leds_rlo"
+Info (12128): Elaborating entity "registroWe" for hierarchy "control_io:control_es|registroWe:leds_v"
+Info (276014): Found 3 instances of uninferred RAM logic
+    Info (276007): RAM logic "cpu:cpu_final|cd:CAMINO_DATOS|regfile:REGFILE|regb" is uninferred due to asynchronous read logic
+    Info (276017): RAM logic "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_DATA|memstack:MEM_STACK|mem" is uninferred due to illegal secondary signals in write logic
+    Info (276017): RAM logic "cpu:cpu_final|cd:CAMINO_DATOS|stack_module:STACK_INST|memstack:MEM_STACK|mem" is uninferred due to illegal secondary signals in write logic
+Info (17049): 2 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file C:/DDP-ProcessorDesign/ProyectoQuartus/output_files/entorno_cpu.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "switches[9]"
+Info (21057): Implemented 1949 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 16 input pins
+    Info (21059): Implemented 18 output pins
+    Info (21061): Implemented 1915 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 20 warnings
+    Info: Peak virtual memory: 4598 megabytes
+    Info: Processing ended: Sat Sep 10 11:47:57 2022
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:04
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/DDP-ProcessorDesign/ProyectoQuartus/output_files/entorno_cpu.map.smsg.
+
+

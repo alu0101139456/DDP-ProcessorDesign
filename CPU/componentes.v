@@ -48,33 +48,20 @@ module registro #(parameter WIDTH = 8)
 
 endmodule
 
+
 module registroWe #(parameter WIDTH = 8)
-              (input wire             clk, reset, we,
-               input wire [1:0] hilo,
-               input wire [WIDTH-1:(WIDTH-1)/2 + 1] d_hi, // [7:4]
-               input wire [(WIDTH-1)/2:0] d_low, // [3:0]
+              (input wire             clk, reset,
+               input wire we,
+               input wire [WIDTH-1:0] d, 
                output reg [WIDTH-1:0] q);
 
   always @(posedge clk, posedge reset)
     if (reset) q <= 0;
-    else if(we) 
-    begin
-      if (hilo == 2'b01)
-        q[(WIDTH-1)/2:0] <= d_low; // [3:0]
-      else if (hilo == 2'b10)
-        q[WIDTH-1:(WIDTH-1)/2 + 1] <= d_hi; // [7:4]
-      else if (hilo == 2'b11)
-        q[WIDTH-1:(WIDTH-1)/2 + 1] <= d_hi; // [7:4]
-        q[(WIDTH-1)/2:0] <= d_low;  // [3:0]
-    end
-endmodule
-
-module registroPC #(parameter ADD = 8) (input wire clk, reset,input wire [9:0] d,output reg [9:0] q);
-  always @(posedge clk, posedge reset)
-    if (reset) q <= ADD;
-    else       q <= d;
+    else if (we) q <= d;
 
 endmodule
+
+
 
 //modulo multiplexor, si s=1 sale d1, s=0 sale d0
 module mux2 #(parameter WIDTH = 8) (input  wire [WIDTH-1:0] d0, d1,input  wire s, output wire [WIDTH-1:0] y);
@@ -113,9 +100,8 @@ module deco #(parameter NBITS = 8) (input wire [$clog2(NBITS)-1:0] selector, out
   
   reg [NBITS-1:0] one = 1;
   
-  always @(selector) begin
+  always @(*) begin
     out = one << selector;    
   end
 
 endmodule
-
